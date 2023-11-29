@@ -47,14 +47,16 @@ namespace Avtoobves.Controllers
                 new(ClaimsIdentity.DefaultNameClaimType, model.UserName)
             };
                 
-            var id = new ClaimsIdentity(
+            var identity = new ClaimsIdentity(
                 claims,
-                "AvtoobvesCookie",
+                "ApplicationCookie",
                 ClaimsIdentity.DefaultNameClaimType,
                 ClaimsIdentity.DefaultRoleClaimType);
 
+            var principal = new ClaimsPrincipal(identity);
+
             HttpContext
-                .SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id))
+                .SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal)
                 .GetAwaiter()
                 .GetResult();
                 

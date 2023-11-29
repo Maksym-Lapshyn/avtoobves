@@ -1,4 +1,5 @@
 using Avtoobves.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -24,10 +25,12 @@ namespace Avtoobves
             services.AddDbContext<ProjectContext>(options => options.UseSqlServer(connection));   
             services.AddControllersWithViews();
             
-            services.AddAuthentication().AddCookie(options =>
-            {
-                options.LoginPath = "/Account/Login";
-            });
+            services
+                .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+                {
+                    options.LoginPath = "/Account/Login";
+                });
 
             services.AddTransient<IProjectRepository, ProjectRepository>();
         }
@@ -47,6 +50,7 @@ namespace Avtoobves
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
