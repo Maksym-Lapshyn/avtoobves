@@ -8,71 +8,70 @@
     <meta name="keywords" content="обвес, кенгурятник, пороги, нержавейка, защита бампера, обвес Харьков, кузовные дуги">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/animate.css" rel="stylesheet" />
-    <link href="~/Content/web-style.css" rel="stylesheet" />
-    <link href="~/Content/font-awesome.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/Content/vanillabox/theme/bitter/vanillabox.css">
-    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="~/Content/vanillabox/jquery.vanillabox-0.1.7.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/animate.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome.css" />
+    <link rel="stylesheet" href="~/lib/vanillabox/vanillabox.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
+    <script type="text/javascript" src="~/lib/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery.vanillabox-0.1.7.min.js"></script>
 </head>
 <body>
-    <header>
-        <nav class="nav navbar-default navbar-fixed-top">
-            <div class="container">
-                <div class="col-md-12">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mynavbar" aria-expanded="false" aria-controls="navbar">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a href="@Url.Action("Index", "Home")" class="navbar-brand">Авто Обвес</a>
-                    </div>
-                    <div class="collapse navbar-collapse navbar-right" id="mynavbar">
-                        <ul class="nav navbar-nav">
-                            <li>@Html.ActionLink("Главная", "Index", "Home")</li>
-                            <li>@Html.ActionLink("Наши работы", "Categories", "Home")</li>
-                            <li>@Html.ActionLink("Контакты", "Contacts", "Home")</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-        @RenderBody()
-
-    <footer>
+<header>
+    <nav class="nav navbar-default navbar-fixed-top">
         <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-sm-6 contacts-wrapper">
-                    <p>Все права защищены avtoobves.com.ua&copy;</p>
-                    <p>This website is created by maxon_adc</p>
-                    <p>Icons made by Freepik from <a class="anchor-reverse" href="http://www.flaticon.com/">www.flaticon.com</a></p>
+            <div class="col-md-12">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mynavbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="@Url.Action("Index", "Home")" class="navbar-brand">Авто Обвес</a>
                 </div>
-                <div class="col-xs-12 col-sm-3 contacts-wrapper">
-                    <p><span class="glyphicon glyphicon-flag"></span> Адрес:</p>
-                    <p>Харьков, Украина</p>
-                    <p>Улица Григоровская 66/2</p>
-                </div>
-                <div class="col-xs-12 col-sm-3 contacts-wrapper">
-                    <p><span class="address-icon glyphicon glyphicon-phone-alt"></span> Контакты:</p>
-                    <p>097-461-50-35 (Киевстар)</p>
-                    <p>avtoobves.ukraine@gmail.com</p>
+                <div class="collapse navbar-collapse navbar-right" id="mynavbar">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Главная", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Наши работы", "Categories", "Home")</li>
+                        <li>@Html.ActionLink("Контакты", "Contacts", "Home")</li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </footer>
+    </nav>
+</header>
 
+@RenderBody()
 
-    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
-    <script src="~/Scripts/jquery.easing.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/wow.js"></script>
-    <script src="~/Scripts/custom.js"></script>
-    <script>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 contacts-wrapper">
+                <p>Все права защищены avtoobves.com.ua&copy;</p>
+                <p>This website is created by maxon_adc</p>
+                <p>Icons made by Freepik from <a class="anchor-reverse" href="http://www.flaticon.com/">www.flaticon.com</a></p>
+            </div>
+            <div class="col-xs-12 col-sm-3 contacts-wrapper">
+                <p><span class="glyphicon glyphicon-flag"></span> Адрес:</p>
+                <p>Харьков, Украина</p>
+                <p>Улица Григоровская 66/2</p>
+            </div>
+            <div class="col-xs-12 col-sm-3 contacts-wrapper">
+                <p><span class="address-icon glyphicon glyphicon-phone-alt"></span> Контакты:</p>
+                <p>097-461-50-35 (Киевстар)</p>
+                <p>avtoobves.ukraine@gmail.com</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script type="text/javascript" src="~/lib/jquery.unobtrusive-ajax.js"></script>
+<script type="text/javascript" src="~/lib/jquery.easing.min.js"></script>
+<script type="text/javascript" src="~/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="~/js/wow.js"></script>
+<script type="text/javascript" src="~/js/site.js"></script>
+<script>
     $('.carousel[data-type="multi"] .item').each(function () {
         var next = $(this).next();
         if (!next.length) {
