@@ -82,89 +82,86 @@ body {
     overflow-x: hidden;
     color: #DFFDFF;
     background-color: #DFFDFF;
-    background-image: url('../Images/Infrastructure/shattered.png');
+    background-image: url('../img/general/shattered.png');
 }
 
 .navbar-default {
     background-color: #03121A;
 }
 
-.navbar-toggle:hover, .navbar-toggle {
-    background-color: transparent;
-    color: #AAAE7F;
-}
+/*.navbar-toggle:hover, .navbar-toggle {*/
+/*    background-color: transparent;*/
+/*    color: #AAAE7F;*/
+/*}*/
 
-.navbar-default .navbar-toggle {
-    margin-top: -9px;
-    color: #DFFDFF;
-    border-width: 2px;
-}
+/*.navbar-default .navbar-toggle {*/
+/*    margin-top: -9px;*/
+/*    color: #DFFDFF;*/
+/*    border-width: 2px;*/
+/*}*/
 
-.navbar-default .navbar-toggle:hover {
-    border-color: #AAAE7F;
-    background-color: transparent;
-    color: #AAAE7F;
-    background-color: #AAAE7F;
-}
+/*.navbar-default .navbar-toggle:hover {*/
+/*    border-color: #AAAE7F;*/
+/*    background-color: transparent;*/
+/*    color: #AAAE7F;*/
+/*    background-color: #AAAE7F;*/
+/*}*/
 
-.navbar-default .navbar-toggle:enabled {
-    background-color: transparent;
-}
+/*.navbar-default .navbar-toggle:enabled {*/
+/*    background-color: transparent;*/
+/*}*/
 
-.navbar-default .navbar-toggle .icon-bar {
-    background-color: #DFFDFF;
-}
+/*.navbar-default .navbar-toggle .icon-bar {*/
+/*    background-color: #DFFDFF;*/
+/*}*/
 
 .welcome {
     margin-top: 50px;
-    background: url('../Images/Infrastructure/head.jpg');
-    background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
+    background: url('../img/general/head.jpg') no-repeat center;
 }
-
 
 .nav > li > a {
     padding: 0px;
 }
 
-.navbar-brand {
-    padding: 0px;
-    height: inherit;
-    margin-top: -3px;
-    font-family: 'Ubuntu', sans-serif;
-}
+/*.navbar-brand {*/
+/*    padding: 0px;*/
+/*    height: inherit;*/
+/*    margin-top: -3px;*/
+/*    font-family: 'Ubuntu', sans-serif;*/
+/*}*/
 
-.navbar-default .navbar-brand:hover {
-    color: #AAAE7F;
-}
+/*.navbar-default .navbar-brand:hover {*/
+/*    color: #AAAE7F;*/
+/*}*/
 
-.navbar-default .navbar-brand {
-    color: #DFFDFF;
-    font-size: 34px;
-    font-weight: 700;
-    letter-spacing: 2px;
-}
+/*.navbar-default .navbar-brand {*/
+/*    color: #DFFDFF;*/
+/*    font-size: 34px;*/
+/*    font-weight: 700;*/
+/*    letter-spacing: 2px;*/
+/*}*/
 
-.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
-    color: #AAAE7F;
-    background-color: transparent;
-}
+/*.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {*/
+/*    color: #AAAE7F;*/
+/*    background-color: transparent;*/
+/*}*/
 
-.navbar-default .navbar-nav > li > a {
-    color: #DFFDFF;
-    font-size: 16px;
-    padding: 0px 20px;
-}
+/*.navbar-default .navbar-nav > li > a {*/
+/*    color: #DFFDFF;*/
+/*    font-size: 16px;*/
+/*    padding: 0px 20px;*/
+/*}*/
 
-.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-    color: #AAAE7F;
-}
+/*.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {*/
+/*    color: #AAAE7F;*/
+/*}*/
 
-.navbar-fixed-top {
-    padding: 40px 0;
-    transition: all 0.5s;
-}
+/*.navbar-fixed-top {*/
+/*    padding: 40px 0;*/
+/*    transition: all 0.5s;*/
+/*}*/
 
 .top-nav-collapse {
     background: rgba(0, 0, 0, 0.8);
@@ -174,6 +171,7 @@ body {
 
 .text-welcome {
     padding: 150px 0px 130px;
+    color: white;
 }
 
 .title {
@@ -293,7 +291,6 @@ h1.txt-tl {
     margin-bottom: 50px;
     padding-bottom: 50px;
     padding-top: 40px;
-    background: url('../Images/Infrastructure/scroll.jpg') no-repeat center fixed;
     -webkit-background-size: 100% auto;
     -moz-background-size: 100% auto;
     -o-background-size: 100% auto;
@@ -302,9 +299,7 @@ h1.txt-tl {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    background-attachment: fixed;
-    background-repeat: repeat-y;
-    background-position: center center;
+    background: url('../img/general/scroll.jpg') repeat-y fixed center center;
     position: relative;
     display: block;
     color: #DFFDFF;
@@ -399,6 +394,7 @@ footer {
     padding-top: 30px;
     padding-bottom: 10px;
     background-color: #03121A;
+    color: white;
 }
 
 /****/

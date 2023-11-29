@@ -22,7 +22,6 @@
 /Users/mlaps/Documents/Projects/Avtoobves/obj/Debug/net5.0/Razor/Views/Home/Index.cshtml.g.cs
 /Users/mlaps/Documents/Projects/Avtoobves/obj/Debug/net5.0/Razor/Views/Shared/Error.cshtml.g.cs
 /Users/mlaps/Documents/Projects/Avtoobves/obj/Debug/net5.0/Razor/Views/Shared/_Layout.cshtml.g.cs
-/Users/mlaps/Documents/Projects/Avtoobves/obj/Debug/net5.0/Razor/Views/Shared/_ValidationScriptsPartial.cshtml.g.cs
 /Users/mlaps/Documents/Projects/Avtoobves/obj/Debug/net5.0/Razor/Views/_ViewImports.cshtml.g.cs
 /Users/mlaps/Documents/Projects/Avtoobves/obj/Debug/net5.0/Razor/Views/_ViewStart.cshtml.g.cs
 /Users/mlaps/Documents/Projects/Avtoobves/obj/Debug/net5.0/Avtoobves.RazorTargetAssemblyInfo.cache

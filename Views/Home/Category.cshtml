@@ -1,43 +1,35 @@
 ﻿@model List<Product>
 
 @{
-    string categoryName = string.Empty;
-    if (Model.First().Category.ToString() == "Front")
+    var categoryName = Model.First().Category.ToString() switch
     {
-        categoryName = "Передние защиты";
-    }
-    else if (Model.First().Category.ToString() == "Rear")
-    {
-        categoryName = "Задние защиты";
-    }
-    else if (Model.First().Category.ToString() == "Footer")
-    {
-        categoryName = "Пороги";
-    }
-    else
-    {
-        categoryName = "Прочее";
-    }
-    ViewBag.Title = string.Format("Обвес из нержавейки в Харькове - {0}", categoryName);
+        "Front" => "Передние защиты",
+        "Rear" => "Задние защиты",
+        "Footer" => "Пороги",
+        _ => "Прочее"
+    };
+    
+    ViewBag.Title = $"Обвес из нержавейки в Харькове - {categoryName}";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    int count = 0;
+    var count = 0;
 }
 
 <section class="site-content categories">
     <div class="container">
         <div class="row">
-            @foreach (Product product in Model)
+            @foreach (var product in Model)
             {
                 if (count == 3)
                 {
                     count = 0;
                 }
+                
                 if (count == 0)
                 {
                     <div class="col-md-4 col-xs-6 wow fadeInLeft delay-01s">
                         <a href="@Url.Action("Product", "Home", new { productId = product.Id })">
                             <div class="portfolio-box">
-                                <img src="../Images/@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
+                                <img src="~/img/products/@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
                                 <div class="portfolio-box-caption">
                                     <div class="portfolio-box-caption-content">
                                         <h1>@product.Name</h1>
@@ -52,7 +44,7 @@
                     <div class="col-md-4 col-xs-6 wow fadeInDown delay-01s">
                         <a href="@Url.Action("Product", "Home", new { productId = product.Id })">
                             <div class="portfolio-box">
-                                <img src="../Images/@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
+                                <img src="~/img/products/@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
                                 <div class="portfolio-box-caption">
                                     <div class="portfolio-box-caption-content">
                                         <h1>@product.Name</h1>
@@ -67,7 +59,7 @@
                     <div class="col-md-4 col-xs-6 wow fadeInUp delay-01s">
                         <a href="@Url.Action("Product", "Home", new { productId = product.Id })">
                             <div class="portfolio-box">
-                                <img src="../Images/@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
+                                <img src="~/img/products/@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
                                 <div class="portfolio-box-caption">
                                     <div class="portfolio-box-caption-content">
                                         <h1>@product.Name</h1>
@@ -82,7 +74,7 @@
                     <div class="col-md-4 col-xs-6 wow fadeInUp delay-01s">
                         <a href="@Url.Action("Product", "Home", new { productId = product.Id })">
                             <div class="portfolio-box">
-                                <img src="../Images/@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
+                                <img src="~/img/products/@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
                                 <div class="portfolio-box-caption">
                                     <div class="portfolio-box-caption-content">
                                         <h1>@product.Name</h1>
@@ -97,7 +89,7 @@
                     <div class="col-md-4 col-xs-6 wow fadeInUp delay-01s">
                         <a href="@Url.Action("Product", "Home", new { productId = product.Id })">
                             <div class="portfolio-box">
-                                <img src="../Images/@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
+                                <img src="~/img/products/@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
                                 <div class="portfolio-box-caption">
                                     <div class="portfolio-box-caption-content">
                                         <h1>@product.Name</h1>
@@ -112,7 +104,7 @@
                     <div class="col-md-4 col-xs-6 wow fadeInRight delay-01s">
                         <a href="@Url.Action("Product", "Home", new { productId = product.Id })">
                             <div class="portfolio-box">
-                                <img src="../Images/@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
+                                <img src="~/img/products/@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
                                 <div class="portfolio-box-caption">
                                     <div class="portfolio-box-caption-content">
                                         <h1>@product.Name</h1>
@@ -127,7 +119,7 @@
                     <div class="col-md-4 col-xs-6">
                         <a href="@Url.Action("Product", "Home", new { productId = product.Id })">
                             <div class="portfolio-box">
-                                <img src="../Images/@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
+                                <img src="~/img/products/@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
                                 <div class="portfolio-box-caption">
                                     <div class="portfolio-box-caption-content">
                                         <h1>@product.Name</h1>
@@ -142,5 +134,3 @@
         </div>
     </div>
 </section>
-
-
