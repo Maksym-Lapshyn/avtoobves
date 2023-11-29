@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Обвес из нержавейки в Харькове - Контакты - кенгурятники, пороги, дуги пикапов, бампера";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="site-content address">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-sm-12 text-center wow fadeInLeft delay-01s">
+                <h1>Посмотреть примеры работ, подобрать материал, а также заказать обвес и прочие изделия из нержавеющей стали Вы можете по адресу:</h1>
+                <hr class="hr-center" />
+                <span class="address-icon glyphicon glyphicon-globe"></span><br />
+                <p>
+                    Харьков, Украина<br />
+                    Октябрьский Район<br />
+                    Станция метро "Холодная гора"<br />
+                    Улица Григоровская 66/2<br />
+                    <strong>Доставка по всей Украине!</strong>
+                </p>
+            </div>
+            <div class="col-lg-6 col-sm-12 text-center wow fadeInRight delay-01s">
+                <h1>Получить консультацию, договориться о встрече, выслать размеры и обменяться информацией Вы можете по телефону, или электронной почте:</h1>
+                <hr class="hr-center" />
+                <span class="address-icon glyphicon glyphicon-earphone"></span><br />
+                <p>097-461-50-35 (Киевстар)</p>
+                <span class="address-icon glyphicon glyphicon-envelope"></span><br />
+                <p>avtoobves.ukraine@gmail.com</p>
+            </div>
+        </div>
+        <div id="map" style="height:400px; width:100%;">
+
+        </div>
+    </div>
+</section>
+
+<script>
+    function initMap() {
+        var place = { lat: 49.9789373, lng: 36.1964004 };
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 13,
+            center: place
+        });
+        var marker = new google.maps.Marker({
+            position: place,
+            map: map
+        });
+    }
+</script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9WAVSF4YvCHidqHRIEHEpAG1CvUXso7M&callback=initMap"></script>

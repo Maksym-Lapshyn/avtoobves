@@ -1,0 +1,31 @@
+﻿@model LoginViewModel
+
+@{
+    ViewBag.Title = "Вход в раздел управления материалом";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    <div class="panel">
+        <div class="panel-heading">
+            <h3> Авторизируйтесь</h3>
+        </div>
+        <div class="panel-body">
+            <p class="lead">Введите логин и пароль:</p>
+            @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(m => m.UserName, "Логин")
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                    <p>@Html.ValidationMessageFor(m => m.UserName)</p>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, "Пароль")
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    <p>@Html.ValidationMessageFor(m => m.Password)</p>
+                </div>
+                <input type="submit" value="Log in" class="btn btn-primary" />
+            }
+        </div>
+    </div>
+</div>

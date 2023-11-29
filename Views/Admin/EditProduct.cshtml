@@ -1,0 +1,56 @@
+﻿@model Product
+
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="panel">
+        <div class="panel-heading">
+            @if (ViewBag.New == true && Html.ValidationSummary() != Microsoft.AspNetCore.Html.HtmlString.Empty)
+            {
+                <h1>Добавление новой работы</h1>
+                ViewBag.New = false;
+            }
+            else
+            {
+                <h1>Изменение товара "@Model.Name"</h1>
+            }
+        </div>
+        @using (Html.BeginForm("EditProduct", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="panel-body">
+                @Html.ValidationSummary()
+                @Html.HiddenFor(p => p.Id)
+                @Html.HiddenFor(p => p.SmallImage)
+                @Html.HiddenFor(p => p.BigImage)
+                <p>@Html.LabelFor(p => p.Name)</p>
+                @Html.TextBoxFor(p => p.Name, new { @class = "form-control" })
+
+                <p>@Html.LabelFor(p => p.Description)</p>
+                @Html.TextAreaFor(p => p.Description, new { @class = "form-control", rows = 5 })
+
+                <p>@Html.LabelFor(p => p.Category)</p>
+                @Html.DropDownListFor(p => p.Category, new SelectList(Enum.GetNames(Model.Category.GetType()), Model.Category.ToString()))
+
+                <p>@Html.LabelFor(p => p.BigImage)</p>
+                <p>
+                    @if (Model.BigImage == null)
+                {
+                        <input type="file" name="image" class="form-control" />
+                    }
+                    else
+                    {
+                        <img src="~/Images/@Model.BigImage" width="384" height="216" />
+                        <input type="file" name="image" class="form-control" />
+                    }
+                </p>
+            </div>
+            <div class="panel-footer">
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
+                @Html.ActionLink("Закрыть и вернуться к списку работ", "Index", null, new { @class = "btn btn-default" })
+            </div>
+        }
+    </div>
+</div>

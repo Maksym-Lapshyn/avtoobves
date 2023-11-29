@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "Обвес из нержавейки в Харькове - Категории - кенгурятники, пороги, дуги пикапов, бампера";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="site-content categories">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-sm-6 wow fadeInLeft delay-05s">
+                <a href="@Url.Action("Category", "Home", new { categoryName = "Front" })">
+                    <div class="portfolio-box">
+                        <img src="../Images/Infrastructure/front.jpg" alt="Передние защиты" name="Передние защиты" class="img-responsive">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <h1>Передние защиты</h1>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm-6 wow fadeInRight delay-05s">
+                <a href="@Url.Action("Category", "Home", new { categoryName = "Rear" })">
+                    <div class="portfolio-box">
+                        <img src="../Images/Infrastructure/rear.jpg" alt="Задние защиты" name="Задние защиты" class="img-responsive">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <h1>Задние защиты</h1>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm-6 wow fadeInLeft delay-05s">
+                <a href="@Url.Action("Category", "Home", new { categoryName = "Footer" })">
+                    <div class="portfolio-box">
+                        <img src="../Images/Infrastructure/footer.jpg" alt="Пороги" name="Пороги" class="img-responsive">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <h1>Пороги</h1>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm-6 wow fadeInRight delay-05s">
+                <a href="@Url.Action("Category", "Home", new { categoryName = "Other" })">
+                    <div class="portfolio-box">
+                        <img src="../Images/Infrastructure/other.jpg" alt="Прочее" name="Прочее" class="img-responsive">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <h1>Прочее</h1>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+

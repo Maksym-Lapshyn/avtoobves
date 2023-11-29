@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/jquery-3.1.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Content/error-style.css" rel="stylesheet" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+<div>
+    @if (TempData["success"] != null)
+    {
+        <div class="alert alert-success">@TempData["success"]</div>
+    }
+
+    @if (TempData["fail"] != null)
+    {
+        <div class="alert alert-danger">@TempData["fail"]</div>
+    }
+    @RenderBody()
+</div>
+</body>
+</html>

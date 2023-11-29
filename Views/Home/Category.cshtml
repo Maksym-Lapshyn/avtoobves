@@ -1,0 +1,146 @@
+﻿@model List<Product>
+
+@{
+    string categoryName = string.Empty;
+    if (Model.First().Category.ToString() == "Front")
+    {
+        categoryName = "Передние защиты";
+    }
+    else if (Model.First().Category.ToString() == "Rear")
+    {
+        categoryName = "Задние защиты";
+    }
+    else if (Model.First().Category.ToString() == "Footer")
+    {
+        categoryName = "Пороги";
+    }
+    else
+    {
+        categoryName = "Прочее";
+    }
+    ViewBag.Title = string.Format("Обвес из нержавейки в Харькове - {0}", categoryName);
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int count = 0;
+}
+
+<section class="site-content categories">
+    <div class="container">
+        <div class="row">
+            @foreach (Product product in Model)
+            {
+                if (count == 3)
+                {
+                    count = 0;
+                }
+                if (count == 0)
+                {
+                    <div class="col-md-4 col-xs-6 wow fadeInLeft delay-01s">
+                        <a href="@Url.Action("Product", "Home", new { productId = product.Id })">
+                            <div class="portfolio-box">
+                                <img src="../Images/@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
+                                <div class="portfolio-box-caption">
+                                    <div class="portfolio-box-caption-content">
+                                        <h1>@product.Name</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+                else if (product == Model[1])
+                {
+                    <div class="col-md-4 col-xs-6 wow fadeInDown delay-01s">
+                        <a href="@Url.Action("Product", "Home", new { productId = product.Id })">
+                            <div class="portfolio-box">
+                                <img src="../Images/@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
+                                <div class="portfolio-box-caption">
+                                    <div class="portfolio-box-caption-content">
+                                        <h1>@product.Name</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+                else if (product != Model[1] && product != Model[4] && count == 1)
+                {
+                    <div class="col-md-4 col-xs-6 wow fadeInUp delay-01s">
+                        <a href="@Url.Action("Product", "Home", new { productId = product.Id })">
+                            <div class="portfolio-box">
+                                <img src="../Images/@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
+                                <div class="portfolio-box-caption">
+                                    <div class="portfolio-box-caption-content">
+                                        <h1>@product.Name</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+                else if (product == Model[Model.Count - 2] && count == 1)
+                {
+                    <div class="col-md-4 col-xs-6 wow fadeInUp delay-01s">
+                        <a href="@Url.Action("Product", "Home", new { productId = product.Id })">
+                            <div class="portfolio-box">
+                                <img src="../Images/@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
+                                <div class="portfolio-box-caption">
+                                    <div class="portfolio-box-caption-content">
+                                        <h1>@product.Name</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+                else if (product == Model[Model.Count - 1] && count == 1)
+                {
+                    <div class="col-md-4 col-xs-6 wow fadeInUp delay-01s">
+                        <a href="@Url.Action("Product", "Home", new { productId = product.Id })">
+                            <div class="portfolio-box">
+                                <img src="../Images/@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
+                                <div class="portfolio-box-caption">
+                                    <div class="portfolio-box-caption-content">
+                                        <h1>@product.Name</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+                else if (count == 2)
+                {
+                    <div class="col-md-4 col-xs-6 wow fadeInRight delay-01s">
+                        <a href="@Url.Action("Product", "Home", new { productId = product.Id })">
+                            <div class="portfolio-box">
+                                <img src="../Images/@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
+                                <div class="portfolio-box-caption">
+                                    <div class="portfolio-box-caption-content">
+                                        <h1>@product.Name</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-4 col-xs-6">
+                        <a href="@Url.Action("Product", "Home", new { productId = product.Id })">
+                            <div class="portfolio-box">
+                                <img src="../Images/@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
+                                <div class="portfolio-box-caption">
+                                    <div class="portfolio-box-caption-content">
+                                        <h1>@product.Name</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+                count++;
+            }
+        </div>
+    </div>
+</section>
+
+
