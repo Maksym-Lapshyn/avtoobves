@@ -82,7 +82,7 @@ body {
     overflow-x: hidden;
     color: #DFFDFF;
     background-color: #DFFDFF;
-    background-image: url('../img/general/shattered.png');
+    background-image: url('https://d1ucqhcti31ovy.cloudfront.net/general/shattered.png');
 }
 
 .navbar-default {
@@ -118,7 +118,7 @@ body {
 .welcome {
     margin-top: 50px;
     background-size: cover;
-    background: url('../img/general/head.jpg') no-repeat center;
+    background: url('https://d1ucqhcti31ovy.cloudfront.net/general/head.jpg') no-repeat center;
 }
 
 .nav > li > a {
@@ -299,7 +299,7 @@ h1.txt-tl {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    background: url('../img/general/scroll.jpg') repeat-y fixed center center;
+    background: url('https://d1ucqhcti31ovy.cloudfront.net/general/scroll.jpg') repeat-y fixed center center;
     position: relative;
     display: block;
     color: #DFFDFF;
