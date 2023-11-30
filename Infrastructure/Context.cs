@@ -9,6 +9,6 @@ namespace Avtoobves.Models
         {
         }
 
-        public virtual DbSet<Product> Products { get; }
+        public virtual DbSet<Product> Products { get; set; }
     }
 }

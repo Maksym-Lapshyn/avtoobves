@@ -21,7 +21,7 @@ namespace Avtoobves.Models
             _env = env;
         }
 
-        public IEnumerable<Product> Products => _context.Products;
+        public IEnumerable<Product> Products => _context.Products.ToList();
 
         public Product DeleteProduct(int id)
         {
