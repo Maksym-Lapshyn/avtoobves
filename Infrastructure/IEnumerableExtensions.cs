@@ -9,6 +9,7 @@ namespace Avtoobves.Infrastructure
         public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source, Random rng)
         {
             var elements = source.ToArray();
+
             // Note i > 0 to avoid final pointless iteration
             for (var i = elements.Length - 1; i > 0; i--)
             {
@@ -16,7 +17,7 @@ namespace Avtoobves.Infrastructure
                 var swapIndex = rng.Next(i + 1);
                 (elements[i], elements[swapIndex]) = (elements[swapIndex], elements[i]);
             }
-            
+
             // Lazily yield (avoiding aliasing issues etc)
             foreach (var element in elements)
             {

@@ -1,5 +1,3 @@
-using System;
-
 namespace Avtoobves.Models
 {
     public class ErrorViewModel

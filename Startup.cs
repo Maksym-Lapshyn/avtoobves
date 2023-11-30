@@ -21,10 +21,10 @@ namespace Avtoobves
         public void ConfigureServices(IServiceCollection services)
         {
             var connection = Configuration.GetConnectionString("AvtoobvesDatabase");
-            
-            services.AddDbContext<ProjectContext>(options => options.UseSqlServer(connection));   
+
+            services.AddDbContext<Context>(options => options.UseSqlServer(connection));
             services.AddControllersWithViews();
-            
+
             services
                 .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
@@ -32,7 +32,7 @@ namespace Avtoobves
                     options.LoginPath = "/Account/Login";
                 });
 
-            services.AddTransient<IProjectRepository, ProjectRepository>();
+            services.AddTransient<IRepository, Repository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -56,8 +56,8 @@ namespace Avtoobves
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    "default",
+                    "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

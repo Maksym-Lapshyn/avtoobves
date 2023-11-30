@@ -1,10 +1,20 @@
 (function () {
     var MutationObserver, Util, WeakMap,
-        __bind = function (fn, me) { return function () { return fn.apply(me, arguments); }; },
-        __indexOf = [].indexOf || function (item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+        __bind = function (fn, me) {
+            return function () {
+                return fn.apply(me, arguments);
+            };
+        },
+        __indexOf = [].indexOf || function (item) {
+            for (var i = 0, l = this.length; i < l; i++) {
+                if (i in this && this[i] === item) return i;
+            }
+            return -1;
+        };
 
     Util = (function () {
-        function Util() { }
+        function Util() {
+        }
 
         Util.prototype.extend = function (custom, defaults) {
             var key, value;
@@ -68,7 +78,8 @@
 
         MutationObserver.notSupported = true;
 
-        MutationObserver.prototype.observe = function () { };
+        MutationObserver.prototype.observe = function () {
+        };
 
         return MutationObserver;
 

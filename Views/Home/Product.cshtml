@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = string.Format("Обвес из нержавейки в Харькове - {0}", Model.Name);
     Layout = "~/Views/Shared/_Layout.cshtml";
-    string categoryName = string.Empty;
+    var categoryName = string.Empty;
     if (Model.Category.ToString() == "Front")
     {
         categoryName = "Передние защиты";
@@ -26,21 +26,23 @@
     <div class="container">
         <div class="row">
             <div class="visible-lg visible-md col-md-7">
-                <a id="single-image" href="~/img/products/@Model.BigImage"><img src="~/img/products/@Model.BigImage" alt="@Model.Name" name="@Model.Name" class="img-responsive"></a>
+                <a id="single-image" href="~/img/products/@Model.BigImage">
+                    <img src="~/img/products/@Model.BigImage" alt="@Model.Name" name="@Model.Name" class="img-responsive">
+                </a>
             </div>
             <div class="visible-sm visible-xs text-center">
                 <img src="~/img/products/@Model.BigImage" alt="@Model.Name" name="@Model.Name" class="img-responsive">
             </div>
             <div class="col-md-5 wow fadeInRight delay-01s">
                 <h1>@Model.Name</h1>
-                <hr class="visible-md visible-lg" />
-                <hr class="hr-center visible-sm visible-xs" />
+                <hr class="visible-md visible-lg"/>
+                <hr class="hr-center visible-sm visible-xs"/>
                 <h3>Категория - @Html.ActionLink(categoryName, "Category", "Home", new { categoryName = Model.Category.ToString() }, new { @class = "anchor-standard" })</h3>
                 <p>@Model.Description</p>
             </div>
         </div>
         <h3 class="text-center">Похожие работы:</h3>
-        <hr class="hr-center" />
+        <hr class="hr-center"/>
         @await Component.InvokeAsync("SimilarProducts", new { productId = Model.Id })
     </div>
 </section>
@@ -51,4 +53,3 @@
         });
     });
 </script>
-

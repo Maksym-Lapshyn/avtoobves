@@ -117,12 +117,12 @@
             }
         });
 
-        options.data.push({ name: "X-Requested-With", value: "XMLHttpRequest" });
+        options.data.push({name: "X-Requested-With", value: "XMLHttpRequest"});
 
         method = options.type.toUpperCase();
         if (!isMethodProxySafe(method)) {
             options.type = "POST";
-            options.data.push({ name: "X-HTTP-Method-Override", value: method });
+            options.data.push({name: "X-HTTP-Method-Override", value: method});
         }
 
         $.ajax(options);
@@ -149,8 +149,8 @@
             offset = target.offset();
 
         form.data(data_click, [
-            { name: name + ".x", value: Math.round(evt.pageX - offset.left) },
-            { name: name + ".y", value: Math.round(evt.pageY - offset.top) }
+            {name: name + ".x", value: Math.round(evt.pageX - offset.left)},
+            {name: name + ".y", value: Math.round(evt.pageY - offset.top)}
         ]);
 
         setTimeout(function () {
@@ -163,7 +163,7 @@
             target = $(evt.target),
             form = $(target.parents("form")[0]);
 
-        form.data(data_click, name ? [{ name: name, value: evt.currentTarget.value }] : []);
+        form.data(data_click, name ? [{name: name, value: evt.currentTarget.value}] : []);
         form.data(data_target, target);
 
         setTimeout(function () {

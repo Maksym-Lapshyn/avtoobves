@@ -1,27 +1,21 @@
 ﻿using System.Linq;
-using Microsoft.AspNetCore.Mvc;
 using Avtoobves.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Avtoobves.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IProjectRepository _repository;
+        private readonly IRepository _repository;
 
-        public HomeController(IProjectRepository repository)
+        public HomeController(IRepository repository)
         {
             _repository = repository;
         }
 
-        public ActionResult Index()
-        {
-            return View();
-        }
+        public ActionResult Index() => View();
 
-        public ActionResult Categories()
-        {
-            return View();
-        }
+        public ActionResult Categories() => View();
 
         public ActionResult Category(string categoryName)
         {
@@ -29,7 +23,7 @@ namespace Avtoobves.Controllers
                 .Products
                 .Where(p => p.Category.ToString() == categoryName)
                 .ToList();
-            
+
             return View(products);
         }
 
@@ -38,13 +32,10 @@ namespace Avtoobves.Controllers
             var product = _repository
                 .Products
                 .FirstOrDefault(p => p.Id == productId);
-            
+
             return View(product);
         }
 
-        public ActionResult Contacts()
-        {
-            return View();
-        }
+        public ActionResult Contacts() => View();
     }
 }

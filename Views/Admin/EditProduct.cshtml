@@ -1,4 +1,5 @@
-﻿@model Product
+﻿@using Microsoft.AspNetCore.Html
+@model Product
 
 @{
     ViewBag.Title = Model.Name;
@@ -8,7 +9,7 @@
 <div class="container-fluid">
     <div class="panel">
         <div class="panel-heading">
-            @if (ViewBag.New == true && Html.ValidationSummary() != Microsoft.AspNetCore.Html.HtmlString.Empty)
+            @if (ViewBag.New == true && Html.ValidationSummary() != HtmlString.Empty)
             {
                 <h1>Добавление новой работы</h1>
                 ViewBag.New = false;
@@ -37,18 +38,18 @@
                 <p>@Html.LabelFor(p => p.BigImage)</p>
                 <p>
                     @if (Model.BigImage == null)
-                {
-                        <input type="file" name="image" class="form-control" />
+                    {
+                        <input type="file" name="image" class="form-control"/>
                     }
                     else
                     {
-                        <img src="~/Images/@Model.BigImage" width="384" height="216" />
-                        <input type="file" name="image" class="form-control" />
+                        <img src="~/Images/@Model.BigImage" width="384" height="216"/>
+                        <input type="file" name="image" class="form-control"/>
                     }
                 </p>
             </div>
             <div class="panel-footer">
-                <input type="submit" value="Сохранить" class="btn btn-primary" />
+                <input type="submit" value="Сохранить" class="btn btn-primary"/>
                 @Html.ActionLink("Закрыть и вернуться к списку работ", "Index", null, new { @class = "btn btn-default" })
             </div>
         }

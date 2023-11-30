@@ -10,22 +10,19 @@ namespace Avtoobves.Controllers
     [Authorize]
     public class AdminController : Controller
     {
-        private readonly IProjectRepository _repository;
+        private readonly IRepository _repository;
 
-        public AdminController(IProjectRepository repository)
+        public AdminController(IRepository repository)
         {
             _repository = repository;
         }
 
-        public ActionResult Index()
-        {
-            return View(_repository.Products);
-        }
+        public ActionResult Index() => View(_repository.Products);
 
         public ActionResult EditProduct(int id)
         {
             var product = _repository.Products.FirstOrDefault(p => p.Id == id);
-            
+
             return View(product);
         }
 
@@ -45,11 +42,11 @@ namespace Avtoobves.Controllers
             {
                 return View(product);
             }
-            
+
             _repository.SaveProduct(product, image);
-                
+
             TempData["success"] = $"Товар {product.Name} сохранен";
-                
+
             return RedirectToAction("Index");
         }
 
@@ -57,19 +54,19 @@ namespace Avtoobves.Controllers
         public ActionResult DeleteProduct(int id)
         {
             var productForDelete = _repository.DeleteProduct(id);
-            
+
             if (productForDelete != null)
             {
                 TempData["message"] = $"Товар {productForDelete.Name} удален";
             }
-            
+
             return RedirectToAction("Index");
         }
 
         public ActionResult CreateProduct()
         {
             ViewBag.New = true;
-            
+
             return View("EditProduct", new Product());
         }
     }

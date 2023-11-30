@@ -17,10 +17,7 @@ namespace Avtoobves.Controllers
             _configuration = configuration;
         }
 
-        public IActionResult Login()
-        {
-            return View(new LoginViewModel());
-        }
+        public IActionResult Login() => View(new LoginViewModel());
 
         [HttpPost]
         public IActionResult Login(LoginViewModel model, string returnUrl)
@@ -38,15 +35,12 @@ namespace Avtoobves.Controllers
             {
                 ModelState.AddModelError("", "Неправильное имя пользователя или пароль");
                 TempData["fail"] = "Ошибка аутентификации!";
-                    
+
                 return View();
             }
-                
-            var claims = new List<Claim>
-            {
-                new(ClaimsIdentity.DefaultNameClaimType, model.UserName)
-            };
-                
+
+            var claims = new List<Claim> { new(ClaimsIdentity.DefaultNameClaimType, model.UserName) };
+
             var identity = new ClaimsIdentity(
                 claims,
                 "ApplicationCookie",
@@ -59,7 +53,7 @@ namespace Avtoobves.Controllers
                 .SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal)
                 .GetAwaiter()
                 .GetResult();
-                
+
             return Redirect(returnUrl ?? Url.Action("Index", "Admin"));
         }
     }
