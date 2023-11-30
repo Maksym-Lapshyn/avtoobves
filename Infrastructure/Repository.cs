@@ -1,86 +1,89 @@
 ﻿using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using Microsoft.AspNetCore.Hosting;
+using Amazon;
+using Amazon.Runtime;
+using Amazon.S3;
+using Amazon.S3.Model;
+using Amazon.S3.Transfer;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats.Jpeg;
+using SixLabors.ImageSharp.Processing;
 
 namespace Avtoobves.Models
 {
     public class Repository : IRepository
     {
-        public const string TempImage = "~/Images/temp.jpg";
-
+        private const string BucketName = "avtoobves-images";
+        private const string CdnAddress = "https://d1ucqhcti31ovy.cloudfront.net";
+        
+        private readonly AWSCredentials _awsCredentials;
         private readonly Context _context;
-        private readonly IWebHostEnvironment _env;
 
-        public Repository(Context context, IWebHostEnvironment env)
+        public Repository(Context context, IConfiguration configuration)
         {
+            var awsSection = configuration.GetSection("AwsCredentials");
+            var accessKey = awsSection.GetValue<string>("AccessKey");
+            var secretKey = awsSection.GetValue<string>("SecretKey");
+            _awsCredentials = new BasicAWSCredentials(accessKey, secretKey);
             _context = context;
-            _env = env;
         }
 
         public IEnumerable<Product> Products => _context.Products.ToList();
 
         public Product DeleteProduct(int id)
         {
-            var productForDelete = _context.Products.Find(id);
+            var product = _context.Products.Find(id);
 
-            if (productForDelete == null)
+            if (product == null)
             {
-                return productForDelete;
+                return product;
             }
+            
+            using var s3Client = new AmazonS3Client(_awsCredentials, RegionEndpoint.EUCentral1);
 
-            DeleteImages(productForDelete);
-            _context.Products.Remove(productForDelete);
+            DeleteImages(product, s3Client);
+            _context.Products.Remove(product);
             _context.SaveChanges();
 
-            return productForDelete;
+            return product;
         }
 
         public void SaveProduct(Product product, IFormFile image)
         {
-            if (image != default)
-            {
-                var oldImageLocation = Path.Combine(_env.ContentRootPath, "TempImage");
-                using Stream fileStream = new FileStream(oldImageLocation, FileMode.Create);
+            using var s3Client = new AmazonS3Client(_awsCredentials, RegionEndpoint.EUCentral1);
+            using var transferUtility = new TransferUtility(s3Client);
+            var existingProduct = _context.Products.Find(product.Id);
 
-                image.CopyToAsync(fileStream).GetAwaiter().GetResult();
-
-                product.BigImage = TempImage;
-            }
-
-            if (product.Id == 0)
+            if (existingProduct == default)
             {
                 _context.Products.Add(product);
                 _context.SaveChanges();
-
-                product = _context.Products.FirstOrDefault(p => p.Name == product.Name);
-                product.BigImage = ResizeBigImage(product.Id);
-                product.SmallImage = SaveSmallImage(product.Id);
+                
+                var savedProduct = _context.Products.FirstOrDefault(p => p.Name == product.Name);
+                var (bigImageUrl, smallImageUrl) = UploadImages(savedProduct.Id, image, transferUtility);
+                savedProduct.BigImage = bigImageUrl;
+                savedProduct.SmallImage = smallImageUrl;
 
                 _context.SaveChanges();
 
                 return;
             }
-
-            var forSave = _context.Products.Find(product.Id);
-
-            if (forSave != null)
+            
+            if (existingProduct.BigImage != product.BigImage)
             {
-                if (forSave.BigImage != product.BigImage)
-                {
-                    DeleteImages(forSave);
-
-                    forSave.BigImage = ResizeBigImage(product.Id);
-                    forSave.SmallImage = SaveSmallImage(product.Id);
-                }
-
-                forSave.Name = product.Name;
-                forSave.Description = product.Description;
-                forSave.Category = product.Category;
+                DeleteImages(existingProduct, s3Client);
+                
+                var (bigImageName, smallImageName) = UploadImages(product.Id, image, transferUtility);
+                existingProduct.BigImage = bigImageName;
+                existingProduct.SmallImage = smallImageName;
             }
+
+            existingProduct.Name = product.Name;
+            existingProduct.Description = product.Description;
+            existingProduct.Category = product.Category;
 
             _context.SaveChanges();
         }
@@ -88,12 +91,17 @@ namespace Avtoobves.Models
         public int GetSimilarProducts(int productId, bool left, bool right)
         {
             var product = _context.Products.Find(productId);
-            var repository = _context.Products.Where(p => p.Category == product.Category).ToList();
+
+            var products = _context
+                .Products
+                .Where(p => p.Category == product.Category)
+                .ToList();
+
             var position = 0;
 
-            for (var i = 0; i < repository.Count; i++)
+            for (var i = 0; i < products.Count; i++)
             {
-                if (repository[i].Id == productId)
+                if (products[i].Id == productId)
                 {
                     position = i;
                 }
@@ -110,18 +118,11 @@ namespace Avtoobves.Models
                 position += 4;
             }
 
-            if (position < repository.Count - 3)
+            if (position < products.Count - 3)
             {
-                if (position < 0)
-                {
-                    indexOfFirstElement = 0;
-                }
-                else
-                {
-                    indexOfFirstElement = position;
-                }
+                indexOfFirstElement = position < 0 ? 0 : position;
             }
-            else if (position >= repository.Count - 3)
+            else if (position >= products.Count - 3)
             {
                 indexOfFirstElement = position - 3;
             }
@@ -129,49 +130,58 @@ namespace Avtoobves.Models
             return indexOfFirstElement;
         }
 
-        private string ResizeBigImage(int productId)
+        private static (string bigImageUrl, string smallImageUrl) UploadImages(int productId, IFormFile imageFile, ITransferUtility transferUtility)
         {
-            var oldImageLocation = Path.Combine(_env.ContentRootPath, "TempImage");
-            var oldImage = new Bitmap(oldImageLocation);
-            var newSize = new Size(1440, 1080);
-            var resizedImage = new Bitmap(oldImage, newSize);
+            var bigImageName = GetBigImageName(productId);
+            var smallImageName = GetSmallImageName(productId);  
+            using var bigImage = new MemoryStream();
+            using var smallImage = new MemoryStream();
+            using var originalImage = Image.Load(imageFile.OpenReadStream());
+                
+            originalImage.Mutate(x => x.Resize(1440, 1080));
+            originalImage.Save(bigImage, new JpegEncoder());
+            transferUtility.Upload(bigImage, BucketName, bigImageName);
+            
+            originalImage.Mutate(x => x.Resize(400, 300));
+            originalImage.Save(smallImage, new JpegEncoder());
+            transferUtility.Upload(smallImage, BucketName, smallImageName);
 
-            oldImage.Dispose();
-            File.Delete(oldImageLocation);
-            resizedImage.Save(Path.Combine(_env.ContentRootPath, $"~/Images/big_{productId}.jpg"), ImageFormat.Jpeg);
-            resizedImage.Dispose();
+            var bigImageUrl = $"{CdnAddress}/{bigImageName}";
+            var smallImageUrl = $"{CdnAddress}/{smallImageName}";
 
-            return $"big_{productId}.jpg";
+            return (bigImageUrl, smallImageUrl);
         }
 
-        private string SaveSmallImage(int productId)
+        private static void DeleteImages(Product product, IAmazonS3 s3Client)
         {
-            var bigImageLocation = Path.Combine(_env.ContentRootPath, $"~/Images/big_{productId}.jpg");
-            var bigImage = new Bitmap(bigImageLocation);
-            var newSize = new Size(400, 300);
-            var smallImage = new Bitmap(bigImage, newSize);
+            var hasNoImages = string.IsNullOrWhiteSpace(product.SmallImage) && string.IsNullOrWhiteSpace(product.BigImage);
 
-            smallImage.Save(Path.Combine(_env.ContentRootPath, $"~/Images/small_{productId}.jpg"), ImageFormat.Jpeg);
-            smallImage.Dispose();
-            bigImage.Dispose();
-
-            return $"small_{productId}.jpg";
-        }
-
-        private void DeleteImages(Product product)
-        {
-            var smallPath = Path.Combine(_env.ContentRootPath, $"~/Images/small_{product.Id}.jpg");
-            var bigPath = Path.Combine(_env.ContentRootPath, $"~/Images/big_{product.Id}.jpg");
-
-            if (File.Exists(smallPath))
+            if (hasNoImages)
             {
-                File.Delete(smallPath);
+                return;
             }
-
-            if (File.Exists(bigPath))
+            
+            var deleteObjectRequest = new DeleteObjectsRequest
             {
-                File.Delete(bigPath);
-            }
+                BucketName = BucketName,
+                Objects = new List<KeyVersion>
+                {
+                    new()
+                    {
+                        Key = GetBigImageName(product.Id)
+                    },
+                    new()
+                    {
+                        Key = GetSmallImageName(product.Id)
+                    }
+                }
+            };
+
+            s3Client.DeleteObjectsAsync(deleteObjectRequest).GetAwaiter().GetResult();
         }
+        
+        private static string GetBigImageName(int productId) => $"products/big_{productId}.jpg";
+        
+        private static string GetSmallImageName(int productId) => $"products/small_{productId}.jpg";
     }
 }

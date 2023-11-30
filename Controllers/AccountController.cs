@@ -27,7 +27,7 @@ namespace Avtoobves.Controllers
                 return View();
             }
 
-            var configSection = _configuration.GetSection("Credentials");
+            var configSection = _configuration.GetSection("AdminCredentials");
             var isUsernameMatching = model.UserName == configSection.GetValue<string>("Username");
             var isPasswordMatching = model.Password == configSection.GetValue<string>("Password");
 
@@ -39,7 +39,10 @@ namespace Avtoobves.Controllers
                 return View();
             }
 
-            var claims = new List<Claim> { new(ClaimsIdentity.DefaultNameClaimType, model.UserName) };
+            var claims = new List<Claim>
+            {
+                new(ClaimsIdentity.DefaultNameClaimType, model.UserName)
+            };
 
             var identity = new ClaimsIdentity(
                 claims,
