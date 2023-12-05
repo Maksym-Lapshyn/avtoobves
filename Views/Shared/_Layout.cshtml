@@ -15,17 +15,21 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
     <script type="text/javascript" src="~/lib/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="~/lib/jquery.vanillabox-0.1.7.min.js"></script>
+    <!-- Google Tag Manager -->
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WVPWBS3J');
+    </script>
+    <!-- End Google Tag Manager -->
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-EMLYGCDK00"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-EMLYGCDK00');
-</script>
 <body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WVPWBS3J" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+
 <header>
     <nav class="nav navbar-default navbar-fixed-top">
         <div class="container">
@@ -40,6 +44,7 @@
                 </div>
                 <div class="collapse navbar-collapse navbar-right" id="mynavbar">
                     <ul class="nav navbar-nav">
+                        <li><a href="tel:097-461-50-35">097-461-50-35</a></li>
                         <li>@Html.ActionLink("Главная", "Index", "Home")</li>
                         <li>@Html.ActionLink("Наши работы", "Categories", "Home")</li>
                         <li>@Html.ActionLink("Контакты", "Contacts", "Home")</li>
@@ -67,8 +72,8 @@
             </div>
             <div class="col-xs-12 col-sm-3 contacts-wrapper">
                 <p><span class="address-icon glyphicon glyphicon-phone-alt"></span> Контакты:</p>
-                <p>097-461-50-35 (Киевстар)</p>
-                <p>avtoobves.ukraine@gmail.com</p>
+                <p><a href="tel:097-461-50-35">097-461-50-35 (Киевстар)</a></p>
+                <p><a href="mailto:info@avtoobves.com.ua">info@avtoobves.com.ua</a></p>
             </div>
         </div>
     </div>

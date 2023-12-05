@@ -41,7 +41,7 @@ namespace Avtoobves.Controllers
 
             var claims = new List<Claim>
             {
-                new(ClaimsIdentity.DefaultNameClaimType, model.UserName)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, model.UserName)
             };
 
             var identity = new ClaimsIdentity(

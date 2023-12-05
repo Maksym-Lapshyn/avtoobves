@@ -166,11 +166,11 @@ namespace Avtoobves.Models
                 BucketName = BucketName,
                 Objects = new List<KeyVersion>
                 {
-                    new()
+                    new KeyVersion
                     {
                         Key = GetBigImageName(product.Id)
                     },
-                    new()
+                    new KeyVersion
                     {
                         Key = GetSmallImageName(product.Id)
                     }
