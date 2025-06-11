@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Amazon;
@@ -32,6 +33,8 @@ namespace Avtoobves.Models
         }
 
         public IEnumerable<Product> Products => _context.Products.ToList();
+        
+        public IEnumerable<BlogPost> BlogPosts => _context.BlogPosts.ToList();
 
         public Product DeleteProduct(int id)
         {
@@ -44,11 +47,29 @@ namespace Avtoobves.Models
             
             using var s3Client = new AmazonS3Client(_awsCredentials, RegionEndpoint.EUCentral1);
 
-            DeleteImages(product, s3Client);
+            DeleteImages(s3Client, GetProductSmallImageName(product.Id), GetProductBigImageName(product.Id));
             _context.Products.Remove(product);
             _context.SaveChanges();
 
             return product;
+        }
+
+        public BlogPost DeleteBlogPost(Guid id)
+        {
+            var post = _context.BlogPosts.Find(id);
+
+            if (post == null)
+            {
+                return post;
+            }
+            
+            using var s3Client = new AmazonS3Client(_awsCredentials, RegionEndpoint.EUCentral1);
+
+            DeleteImages(s3Client, GetFirstBlogPostImageName(post.Id), GetSecondBlogPostImageName(post.Id));
+            _context.BlogPosts.Remove(post);
+            _context.SaveChanges();
+
+            return post;
         }
 
         public void SaveProduct(Product product, IFormFile image)
@@ -63,7 +84,7 @@ namespace Avtoobves.Models
                 _context.SaveChanges();
                 
                 var savedProduct = _context.Products.FirstOrDefault(p => p.Name == product.Name);
-                var (bigImageUrl, smallImageUrl) = UploadImages(savedProduct.Id, image, transferUtility);
+                var (bigImageUrl, smallImageUrl) = UploadProductImages(savedProduct.Id, image, transferUtility);
                 savedProduct.BigImage = bigImageUrl;
                 savedProduct.SmallImage = smallImageUrl;
 
@@ -74,9 +95,8 @@ namespace Avtoobves.Models
             
             if (existingProduct.BigImage != product.BigImage)
             {
-                DeleteImages(existingProduct, s3Client);
-                
-                var (bigImageName, smallImageName) = UploadImages(product.Id, image, transferUtility);
+                DeleteImages(s3Client, GetProductSmallImageName(existingProduct.Id), GetProductBigImageName(existingProduct.Id));
+                var (bigImageName, smallImageName) = UploadProductImages(product.Id, image, transferUtility);
                 existingProduct.BigImage = bigImageName;
                 existingProduct.SmallImage = smallImageName;
             }
@@ -86,6 +106,48 @@ namespace Avtoobves.Models
             existingProduct.Category = product.Category;
 
             _context.SaveChanges();
+        }
+
+        public void SaveBlogPost(BlogPost newBlogPost, IFormFile firstImage, IFormFile secondImage)
+        {
+            using var s3Client = new AmazonS3Client(_awsCredentials, RegionEndpoint.EUCentral1);
+            using var transferUtility = new TransferUtility(s3Client);
+            var existingPost = _context.BlogPosts.Find(newBlogPost.Id);
+
+            if (existingPost == default)
+            {
+                newBlogPost.Id = Guid.NewGuid();
+                newBlogPost.CreatedAt = DateTime.UtcNow;
+                newBlogPost.CreatedBy = "Администратор";
+                var (firstImageUrl, secondImageUrl) = UploadBlogPostImages(newBlogPost.Id, firstImage, secondImage, transferUtility);
+                newBlogPost.FirstImageUrl = firstImageUrl;
+                newBlogPost.SecondImageUrl = secondImageUrl;
+
+                _context.BlogPosts.Add(newBlogPost);
+                _context.SaveChanges();
+            }
+            else
+            {
+                var isReplacingImages = firstImage != default && secondImage != default;
+
+                if (isReplacingImages)
+                {
+                    DeleteImages(s3Client, GetFirstBlogPostImageName(existingPost.Id), GetSecondBlogPostImageName(existingPost.Id));
+                    var (firstImageUrl, secondImageUrl) = UploadBlogPostImages(newBlogPost.Id, firstImage, secondImage, transferUtility);
+                    existingPost.FirstImageUrl = firstImageUrl;
+                    existingPost.SecondImageUrl = secondImageUrl;
+                }
+                
+                existingPost.CreatedBy = newBlogPost.CreatedBy;
+                existingPost.CreatedAt = newBlogPost.CreatedAt;
+                existingPost.Title = newBlogPost.Title;
+                existingPost.Description = newBlogPost.Description;
+                existingPost.FirstParagraphText = newBlogPost.FirstParagraphText;
+                existingPost.SecondParagraphText = newBlogPost.SecondParagraphText;
+                existingPost.ThirdParagraphText = newBlogPost.ThirdParagraphText;
+
+                _context.SaveChanges();
+            }
         }
 
         public int GetSimilarProducts(int productId, bool left, bool right)
@@ -130,10 +192,10 @@ namespace Avtoobves.Models
             return indexOfFirstElement;
         }
 
-        private static (string bigImageUrl, string smallImageUrl) UploadImages(int productId, IFormFile imageFile, ITransferUtility transferUtility)
+        private static (string bigImageUrl, string smallImageUrl) UploadProductImages(int productId, IFormFile imageFile, ITransferUtility transferUtility)
         {
-            var bigImageName = GetBigImageName(productId);
-            var smallImageName = GetSmallImageName(productId);  
+            var bigImageName = GetProductBigImageName(productId);
+            var smallImageName = GetProductSmallImageName(productId);  
             using var bigImage = new MemoryStream();
             using var smallImage = new MemoryStream();
             using var originalImage = Image.Load(imageFile.OpenReadStream());
@@ -152,11 +214,47 @@ namespace Avtoobves.Models
             return (bigImageUrl, smallImageUrl);
         }
 
-        private static void DeleteImages(Product product, IAmazonS3 s3Client)
+        private static (string firstImageUrl, string secondImageUrl) UploadBlogPostImages(
+            Guid blogPostId,
+            IFormFile firstImageFile,
+            IFormFile secondImageFile,
+            ITransferUtility transferUtility)
         {
-            var hasNoImages = string.IsNullOrWhiteSpace(product.SmallImage) && string.IsNullOrWhiteSpace(product.BigImage);
+            var firstImageName = GetFirstBlogPostImageName(blogPostId);
+            using var fistImageStream = new MemoryStream();
+            using var firstImage = Image.Load(firstImageFile.OpenReadStream());
+            
+            firstImage.Mutate(x => x.Resize(1440, 1080));
+            firstImage.Save(fistImageStream, new JpegEncoder());
+            transferUtility.Upload(fistImageStream, BucketName, firstImageName);
+            
+            var secondImageName = GetSecondBlogPostImageName(blogPostId);
+            using var secondImageStream = new MemoryStream();
+            using var secondImage = Image.Load(secondImageFile.OpenReadStream());
+            
+            secondImage.Mutate(x => x.Resize(1440, 1080));
+            secondImage.Save(secondImageStream, new JpegEncoder());
+            transferUtility.Upload(secondImageStream, BucketName, secondImageName);
+            
+            var firstImageUrl = $"{CdnAddress}/{firstImageName}";
+            var secondImageUrl = $"{CdnAddress}/{secondImageName}";
 
-            if (hasNoImages)
+            return (firstImageUrl, secondImageUrl);
+        }
+
+        private static void DeleteImages(IAmazonS3 s3Client, params string[] imageNames)
+        {
+            if (imageNames == default)
+            {
+                return;
+            }
+
+            var imagesToDelete = imageNames
+                .Where(i => !string.IsNullOrWhiteSpace(i))
+                .Select(i => new KeyVersion { Key = i })
+                .ToList();
+
+            if (!imagesToDelete.Any())
             {
                 return;
             }
@@ -164,24 +262,18 @@ namespace Avtoobves.Models
             var deleteObjectRequest = new DeleteObjectsRequest
             {
                 BucketName = BucketName,
-                Objects = new List<KeyVersion>
-                {
-                    new KeyVersion
-                    {
-                        Key = GetBigImageName(product.Id)
-                    },
-                    new KeyVersion
-                    {
-                        Key = GetSmallImageName(product.Id)
-                    }
-                }
+                Objects = imagesToDelete
             };
 
             s3Client.DeleteObjectsAsync(deleteObjectRequest).GetAwaiter().GetResult();
         }
         
-        private static string GetBigImageName(int productId) => $"products/big_{productId}.jpg";
+        private static string GetProductBigImageName(int productId) => $"products/big_{productId}.jpg";
         
-        private static string GetSmallImageName(int productId) => $"products/small_{productId}.jpg";
+        private static string GetProductSmallImageName(int productId) => $"products/small_{productId}.jpg";
+        
+        private static string GetFirstBlogPostImageName(Guid blogPostId) => $"blogPosts/{blogPostId}_1.jpg";
+        
+        private static string GetSecondBlogPostImageName(Guid blogPostId) => $"blogPosts/{blogPostId}_2.jpg";
     }
 }

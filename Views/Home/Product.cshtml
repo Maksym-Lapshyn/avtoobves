@@ -1,25 +1,16 @@
 ﻿@model Product
 
 @{
-    ViewBag.Title = string.Format("Обвес из нержавейки в Харькове - {0}", Model.Name);
+    ViewBag.Title = $"Обвес из нержавейки в Харькове - {Model.Name}";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var categoryName = string.Empty;
-    if (Model.Category.ToString() == "Front")
+
+    var categoryName = Model.Category.ToString() switch
     {
-        categoryName = "Передние защиты";
-    }
-    else if (Model.Category.ToString() == "Rear")
-    {
-        categoryName = "Задние защиты";
-    }
-    else if (Model.Category.ToString() == "Footer")
-    {
-        categoryName = "Пороги";
-    }
-    else
-    {
-        categoryName = "Прочее";
-    }
+        "Front" => "Передние защиты",
+        "Rear" => "Задние защиты",
+        "Footer" => "Пороги",
+        _ => "Прочее"
+    };
 }
 
 <section class="site-content categories product">

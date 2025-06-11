@@ -1,0 +1,64 @@
+@model List<Product>
+
+@{
+    ViewBag.Title = "Все работы";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h1>Все работы</h1>
+            <p>Всего работ - @Model.Count()</p>
+            <p>@Html.ActionLink("Добавить работу", "CreateProduct", "Admin", new { @class = "btn btn-success" })</p>
+        </div>
+        <div class="panel-body">
+            <table class="table table-striped table-bordered">
+                <tr>
+                    <th style="width:15%;">Id</th>
+                    <th style="width:15%;">Название</th>
+                    <th style="width:15%;">Категория</th>
+                    <th style="width:15%;">Большое фото</th>
+                    <th style="width:15%;">Маленькое фото</th>
+                    <th style="width:25%;">Действия</th>
+                </tr>
+                @foreach (var product in Model)
+                {
+                    <tr>
+                        <td>@product.Id</td>
+                        <td>@product.Name</td>
+                        <td>@product.Category</td>
+                        <td>
+                            @if (product.BigImage == null)
+                            {
+                                <p>Фото еще не добавлено</p>
+                            }
+                            else
+                            {
+                                <img src="@product.BigImage" width="192" height="108"/>
+                            }
+                        </td>
+                        <td>
+                            @if (product.SmallImage == null)
+                            {
+                                <p>Фото еще не добавлено</p>
+                            }
+                            else
+                            {
+                                <img src="@product.SmallImage" width="192" height="108"/>
+                            }
+                        </td>
+                        <td>
+                            @Html.ActionLink("Изменить", "EditProduct", new { id = product.Id }, new { @class = "btn btn-success" })
+                            @using (Html.BeginForm("DeleteProduct", "Admin", FormMethod.Post))
+                            {
+                                @Html.Hidden("id", product.Id)
+                                <input type="submit" class="btn btn-danger" value="Удалить"/>
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

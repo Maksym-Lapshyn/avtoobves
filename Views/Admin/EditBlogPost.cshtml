@@ -1,0 +1,79 @@
+@using Microsoft.AspNetCore.Html
+@model BlogPost
+
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="panel">
+        <div class="panel-heading">
+            @if (ViewBag.New == true && Html.ValidationSummary() != HtmlString.Empty)
+            {
+                <h1>Добавление нового поста</h1>
+                ViewBag.New = false;
+            }
+            else
+            {
+                <h1>Изменение поста "@Model.Title"</h1>
+            }
+        </div>
+        @using (Html.BeginForm("EditBlogPost", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="panel-body">
+                @Html.ValidationSummary()
+                @Html.HiddenFor(bp => bp.Id)
+                @Html.HiddenFor(bp => bp.FirstImageUrl)
+                @Html.HiddenFor(bp => bp.SecondImageUrl)
+                @Html.HiddenFor(bp => bp.CreatedAt)
+                @Html.HiddenFor(bp => bp.CreatedBy)
+
+                <p>@Html.LabelFor(bp => bp.Title)</p>
+                @Html.TextBoxFor(bp => bp.Title, new { @class = "form-control" })
+
+                <p>@Html.LabelFor(bp => bp.Description)</p>
+                @Html.TextAreaFor(bp => bp.Description, new { @class = "form-control", rows = 5 })
+
+                <p>@Html.LabelFor(bp => bp.FirstParagraphText)</p>
+                @Html.TextAreaFor(bp => bp.FirstParagraphText, new { @class = "form-control", rows = 20 })
+
+                <p>@Html.LabelFor(p => p.FirstImageUrl)</p>
+                <p>
+                    @if (Model.FirstImageUrl == null)
+                    {
+                        <input type="file" name="firstImage" class="form-control"/>
+                    }
+                    else
+                    {
+                        <img src="@Model.FirstImageUrl" width="384" height="216"/>
+                        <input type="file" name="firstImage" class="form-control"/>
+                    }
+                </p>
+
+                <p>@Html.LabelFor(bp => bp.SecondParagraphText)</p>
+                @Html.TextAreaFor(bp => bp.SecondParagraphText, new { @class = "form-control", rows = 20 })
+
+                <p>@Html.LabelFor(p => p.SecondImageUrl)</p>
+                <p>
+                    @if (Model.SecondImageUrl == null)
+                    {
+                        <input type="file" name="secondImage" class="form-control"/>
+                    }
+                    else
+                    {
+                        <img src="@Model.SecondImageUrl" width="384" height="216"/>
+                        <input type="file" name="secondImage" class="form-control"/>
+                    }
+                </p>
+
+                <p>@Html.LabelFor(bp => bp.ThirdParagraphText)</p>
+                @Html.TextAreaFor(bp => bp.ThirdParagraphText, new { @class = "form-control", rows = 20 })
+            </div>
+            <div class="panel-footer">
+                <input type="submit" value="Сохранить" class="btn btn-primary"/>
+                @Html.ActionLink("Закрыть и вернуться к постам", "BlogPosts", "Admin", new { @class = "btn btn-default" })
+            </div>
+        }
+    </div>
+</div>

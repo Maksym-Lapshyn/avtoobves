@@ -1,0 +1,28 @@
+@model List<BlogPost>
+
+@{
+    ViewBag.Title = "Обвес из нержавейки в Харькове - Блог - кенгурятники, пороги, дуги пикапов, бампера";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="site-content categories">
+    <div class="container">
+        <div class="row">
+            @foreach (var blogPost in Model)
+            {
+                <a href="@Url.Action("BlogPost", "Home", new { id = blogPost.Id })">
+                    <div class="col-md-4 col-xs-6">
+                        <div class="thumbnail">
+                            <img src="@blogPost.FirstImageUrl" alt="...">
+                            <div class="caption">
+                                <h3>@blogPost.Title</h3>
+                                <p>@blogPost.Description</p>
+                                <p>@blogPost.CreatedBy - <span class="badge">@blogPost.CreatedAt.ToString("dd-MM-yyyy")</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+    </div>
+</section>

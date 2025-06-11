@@ -1,0 +1,63 @@
+@model List<BlogPost>
+
+@{
+    ViewBag.Title = "Все посты";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="container-fluid">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h1>Все посты</h1>
+            <p>Всего постов - @Model.Count()</p>
+            <p>@Html.ActionLink("Добавить пост", "CreateBlogPost", "Admin", new { @class = "btn btn-success" })</p>
+        </div>
+        <div class="panel-body">
+            <table class="table table-striped table-bordered">
+                <tr>
+                    <th style="width:15%;">Id</th>
+                    <th style="width:20%;">Название</th>
+                    <th style="width:25%;">Первое фото</th>
+                    <th style="width:25%;">Второе фото</th>
+                    <th style="width:15%;">Действия</th>
+                </tr>
+                @foreach (var blogPost in Model)
+                {
+                    <tr>
+                        <td>@blogPost.Id</td>
+                        <td>@blogPost.Title</td>
+                        <td>
+                            @if (blogPost.FirstImageUrl == null)
+                            {
+                                <p>Фото еще не добавлено</p>
+                            }
+                            else
+                            {
+                                <img src="@blogPost.FirstImageUrl" width="192" height="108"/>
+                            }
+                        </td>
+                        <td>
+                            @if (blogPost.SecondImageUrl == null)
+                            {
+                                <p>Фото еще не добавлено</p>
+                            }
+                            else
+                            {
+                                <img src="@blogPost.SecondImageUrl" width="192" height="108"/>
+                            }
+                        </td>
+                        <td>
+                            @Html.ActionLink("Изменить", "EditBlogPost", new { id = blogPost.Id }, new { @class = "btn btn-success" })
+                            @using (Html.BeginForm("DeleteBlogPost", "Admin", FormMethod.Post))
+                            {
+                                @Html.Hidden("id", blogPost.Id)
+                                <input type="submit" class="btn btn-danger" value="Удалить"/>
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
