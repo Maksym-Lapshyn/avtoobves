@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Avtoobves.Infrastructure;
 using Avtoobves.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -10,68 +11,65 @@ namespace Avtoobves.Controllers
     [Authorize]
     public class AdminController : Controller
     {
-        private readonly IRepository _repository;
+        private readonly IProductRepository _productRepository;
+        private readonly IBlogPostRepository _blogPostRepository;
 
-        public AdminController(IRepository repository)
+        public AdminController(IProductRepository productRepository, IBlogPostRepository blogPostRepository)
         {
-            _repository = repository;
+            _productRepository = productRepository;
+            _blogPostRepository = blogPostRepository;
         }
 
         public ActionResult Index() => View();
         
-        public ActionResult Products() => View(_repository.Products.ToList());
+        public ActionResult Products() => View(_productRepository.Products.ToList());
 
-        public ActionResult BlogPosts() => View(_repository.BlogPosts.ToList());
+        public ActionResult BlogPosts() => View(_blogPostRepository.BlogPosts.ToList());
 
-        public ActionResult EditProduct(int id)
+        public ActionResult EditProduct(int? id)
         {
-            var product = _repository.Products.FirstOrDefault(p => p.Id == id);
-
-            return View(product);
+            var product = _productRepository.Products.FirstOrDefault(p => p.Id == id);
+            return View(product ?? new Product());
         }
         
-        public ActionResult EditBlogPost(Guid id)
+        public ActionResult EditBlogPost(Guid? id)
         {
-            var blogPost = _repository.BlogPosts.FirstOrDefault(bp => bp.Id == id);
-
-            return View(blogPost);
+            var blogPost = _blogPostRepository.BlogPosts.FirstOrDefault(bp => bp.Id == id);
+            return View(blogPost ?? new BlogPost());
         }
 
         [HttpPost]
-        public ActionResult EditProduct(Product product, IFormFile image)
+        public ActionResult SaveProduct(Product product, IFormFile image)
         {
-            var productWithSameName = _repository
+            var productWithSameName = _productRepository
                 .Products
-                .FirstOrDefault(p => p.Name.Equals(product.Name, StringComparison.OrdinalIgnoreCase));
+                .FirstOrDefault(p => p.Name == product.Name && p.Id != product.Id);
 
-            if (productWithSameName != default)
+            if (productWithSameName != null)
             {
-                ModelState.AddModelError("Name", "Product names cannot repeat!");
+                ModelState.AddModelError("Name", "Товар с таким названием уже существует");
+                return View("EditProduct", product);
             }
 
             if (!ModelState.IsValid)
             {
-                return View(product);
+                return View("EditProduct", product);
             }
 
-            _repository.SaveProduct(product, image);
-
-            TempData["success"] = $"Товар {product.Name} сохранен";
+            _productRepository.SaveProduct(product, image);
 
             return RedirectToAction("Products");
         }
         
         [HttpPost]
-        public ActionResult EditBlogPost(BlogPost blogPost, IFormFile firstImage, IFormFile secondImage)
+        public ActionResult SaveBlogPost(BlogPost blogPost, IFormFile firstImage, IFormFile secondImage)
         {
             if (!ModelState.IsValid)
             {
-                return View(blogPost);
+                return View("EditBlogPost", blogPost);
             }
 
-            _repository.SaveBlogPost(blogPost, firstImage, secondImage);
-
-            TempData["success"] = $"Пост {blogPost.Title} сохранен";
+            _blogPostRepository.SaveBlogPost(blogPost, firstImage, secondImage);
 
             return RedirectToAction("BlogPosts");
         }
@@ -79,11 +77,11 @@ namespace Avtoobves.Controllers
         [HttpPost]
         public ActionResult DeleteProduct(int id)
         {
-            var deleteProduct = _repository.DeleteProduct(id);
+            var deleteProduct = _productRepository.DeleteProduct(id);
 
-            if (deleteProduct != null)
+            if (deleteProduct == null)
             {
-                TempData["message"] = $"Товар {deleteProduct.Name} удален";
+                return NotFound();
             }
 
             return RedirectToAction("Products");
@@ -92,11 +90,11 @@ namespace Avtoobves.Controllers
         [HttpPost]
         public ActionResult DeleteBlogPost(Guid id)
         {
-            var deletedBlogPost = _repository.DeleteBlogPost(id);
+            var deletedBlogPost = _blogPostRepository.DeleteBlogPost(id);
 
-            if (deletedBlogPost != null)
+            if (deletedBlogPost == null)
             {
-                TempData["message"] = $"Пост {deletedBlogPost.Title} удален";
+                return NotFound();
             }
 
             return RedirectToAction("BlogPosts");

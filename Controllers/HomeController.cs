@@ -1,5 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
+using Avtoobves.Infrastructure;
 using Avtoobves.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,50 +7,46 @@ namespace Avtoobves.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IRepository _repository;
+        private readonly IProductRepository _productRepository;
+        private readonly IBlogPostRepository _blogPostRepository;
 
-        public HomeController(IRepository repository)
+        public HomeController(IProductRepository productRepository, IBlogPostRepository blogPostRepository)
         {
-            _repository = repository;
+            _productRepository = productRepository;
+            _blogPostRepository = blogPostRepository;
         }
 
-        public ActionResult Index() => View();
-
-        public ActionResult Categories() => View();
-
-        public ActionResult Category(string categoryName)
+        public IActionResult Index()
         {
-            var products = _repository
+            var products = _productRepository
                 .Products
-                .Where(p => p.Category.ToString() == categoryName)
+                .OrderBy(p => p.Category)
                 .ToList();
 
             return View(products);
         }
 
-        public ActionResult Product(int productId)
+        public IActionResult Product(int id)
         {
-            var product = _repository
+            var product = _productRepository
                 .Products
-                .FirstOrDefault(p => p.Id == productId);
+                .FirstOrDefault(p => p.Id == id);
 
             return View(product);
         }
 
-        public ActionResult Contacts() => View();
-
-        public ActionResult Blog()
+        public IActionResult Blog()
         {
-            var blogPosts = _repository.BlogPosts.ToList();
+            var blogPosts = _blogPostRepository.BlogPosts.ToList();
 
             return View(blogPosts);
         }
-        
-        public ActionResult BlogPost(Guid id)
+
+        public IActionResult BlogPost(string id)
         {
-            var blogPost = _repository
+            var blogPost = _blogPostRepository
                 .BlogPosts
-                .FirstOrDefault(bp => bp.Id == id);
+                .FirstOrDefault(bp => bp.Id.ToString() == id);
 
             return View(blogPost);
         }

@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Avtoobves.Infrastructure;
 
 namespace Avtoobves
 {
@@ -29,7 +30,8 @@ namespace Avtoobves
                 .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options => { options.LoginPath = "/Account/Login"; });
 
-            services.AddTransient<IRepository, Repository>();
+            services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<IBlogPostRepository, BlogPostRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

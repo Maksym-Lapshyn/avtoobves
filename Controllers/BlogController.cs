@@ -1,17 +1,17 @@
-using Avtoobves.Models;
+using Avtoobves.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Avtoobves.Controllers
 {
     public class BlogController : Controller
     {
-        private readonly IRepository _repository;
+        private readonly IBlogPostRepository _blogPostRepository;
 
-        public BlogController(IRepository repository)
+        public BlogController(IBlogPostRepository blogPostRepository)
         {
-            _repository = repository;
+            _blogPostRepository = blogPostRepository;
         }
-        
-        
+
+        public IActionResult Index() => View(_blogPostRepository.BlogPosts);
     }
 }
