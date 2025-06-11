@@ -1,9 +1,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Amazon.S3.Transfer;
 using Avtoobves.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Jpeg;
@@ -18,48 +21,58 @@ namespace Avtoobves.Infrastructure
         {
         }
 
-        public IEnumerable<Product> Products => Context.Products.ToList();
-
-        public Product DeleteProduct(int id)
+        public async Task<List<Product>> GetProducts(CancellationToken cancellationToken)
         {
-            var product = Context.Products.Find(id);
+            return await Context.Products.OrderBy(p => p.Category).ToListAsync(cancellationToken);
+        }
 
-            if (product == null)
-            {
-                return product;
-            }
-
-            DeleteImages(GetProductSmallImageName(product.Id), GetProductBigImageName(product.Id));
-            Context.Products.Remove(product);
-            Context.SaveChanges();
+        public async Task<Product> GetProduct(int id, CancellationToken cancellationToken)
+        {
+            var product = await Context.Products.FindAsync(id, cancellationToken);
 
             return product;
         }
 
-        public void SaveProduct(Product product, IFormFile image)
+        public async Task<Product> DeleteProduct(int id)
+        {
+            var product = await Context.Products.FindAsync(id);
+
+            if (product == null)
+            {
+                return null;
+            }
+
+            await DeleteImagesAsync(GetProductSmallImageName(product.Id), GetProductBigImageName(product.Id));
+            Context.Products.Remove(product);
+            await Context.SaveChangesAsync();
+
+            return product;
+        }
+
+        public async Task SaveProduct(Product product, IFormFile image)
         {
             using var s3Client = CreateS3Client();
             using var transferUtility = CreateTransferUtility(s3Client);
-            var existingProduct = Context.Products.Find(product.Id);
+            var existingProduct = await Context.Products.FindAsync(product.Id);
 
             if (existingProduct == default)
             {
                 Context.Products.Add(product);
-                Context.SaveChanges();
+                await Context.SaveChangesAsync();
                 
-                var savedProduct = Context.Products.FirstOrDefault(p => p.Name == product.Name);
-                var (bigImageUrl, smallImageUrl) = UploadProductImages(savedProduct.Id, image, transferUtility);
+                var savedProduct = await Context.Products.FirstOrDefaultAsync(p => p.Name == product.Name);
+                var (bigImageUrl, smallImageUrl) = await UploadProductImagesAsync(savedProduct.Id, image, transferUtility);
                 savedProduct.BigImage = bigImageUrl;
                 savedProduct.SmallImage = smallImageUrl;
 
-                Context.SaveChanges();
+                await Context.SaveChangesAsync();
                 return;
             }
             
             if (existingProduct.BigImage != product.BigImage)
             {
-                DeleteImages(GetProductSmallImageName(existingProduct.Id), GetProductBigImageName(existingProduct.Id));
-                var (bigImageName, smallImageName) = UploadProductImages(product.Id, image, transferUtility);
+                await DeleteImagesAsync(GetProductSmallImageName(existingProduct.Id), GetProductBigImageName(existingProduct.Id));
+                var (bigImageName, smallImageName) = await UploadProductImagesAsync(product.Id, image, transferUtility);
                 existingProduct.BigImage = bigImageName;
                 existingProduct.SmallImage = smallImageName;
             }
@@ -68,17 +81,17 @@ namespace Avtoobves.Infrastructure
             existingProduct.Description = product.Description;
             existingProduct.Category = product.Category;
 
-            Context.SaveChanges();
+            await Context.SaveChangesAsync();
         }
 
-        public int GetSimilarProducts(int productId, bool left, bool right)
+        public async Task<int> GetSimilarProductIds(int productId, bool left, bool right, CancellationToken cancellationToken)
         {
-            var product = Context.Products.Find(productId);
+            var product = await Context.Products.FindAsync(productId);
 
-            var products = Context
+            var products = await Context
                 .Products
                 .Where(p => p.Category == product.Category)
-                .ToList();
+                .ToListAsync(cancellationToken);
 
             var position = 0;
 
@@ -113,21 +126,24 @@ namespace Avtoobves.Infrastructure
             return indexOfFirstElement;
         }
 
-        private static (string bigImageUrl, string smallImageUrl) UploadProductImages(int productId, IFormFile imageFile, ITransferUtility transferUtility)
+        private static async Task<(string bigImageUrl, string smallImageUrl)> UploadProductImagesAsync(
+            int productId, 
+            IFormFile imageFile, 
+            ITransferUtility transferUtility)
         {
             var bigImageName = GetProductBigImageName(productId);
-            var smallImageName = GetProductSmallImageName(productId);  
+            var smallImageName = GetProductSmallImageName(productId);
             using var bigImage = new MemoryStream();
             using var smallImage = new MemoryStream();
-            using var originalImage = Image.Load(imageFile.OpenReadStream());
+            using var originalImage = await Image.LoadAsync(imageFile.OpenReadStream());
                 
             originalImage.Mutate(x => x.Resize(1440, 1080));
-            originalImage.Save(bigImage, new JpegEncoder());
-            transferUtility.Upload(bigImage, BucketName, bigImageName);
+            await originalImage.SaveAsync(bigImage, new JpegEncoder());
+            await transferUtility.UploadAsync(bigImage, BucketName, bigImageName);
             
             originalImage.Mutate(x => x.Resize(400, 300));
-            originalImage.Save(smallImage, new JpegEncoder());
-            transferUtility.Upload(smallImage, BucketName, smallImageName);
+            await originalImage.SaveAsync(smallImage, new JpegEncoder());
+            await transferUtility.UploadAsync(smallImage, BucketName, smallImageName);
 
             var bigImageUrl = $"{CdnAddress}/{bigImageName}";
             var smallImageUrl = $"{CdnAddress}/{smallImageName}";

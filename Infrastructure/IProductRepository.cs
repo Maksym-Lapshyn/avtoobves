@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using Avtoobves.Models;
 using Microsoft.AspNetCore.Http;
 
@@ -6,12 +8,14 @@ namespace Avtoobves.Infrastructure
 {
     public interface IProductRepository
     {
-        IEnumerable<Product> Products { get; }
+        Task<List<Product>> GetProducts(CancellationToken cancellationToken);
 
-        Product DeleteProduct(int id);
+        Task<Product> GetProduct(int id, CancellationToken cancellationToken);
+        
+        Task<Product> DeleteProduct(int id);
 
-        void SaveProduct(Product product, IFormFile image);
+        Task SaveProduct(Product product, IFormFile image);
 
-        int GetSimilarProducts(int productId, bool left, bool right);
+        Task<int> GetSimilarProductIds(int productId, bool left, bool right, CancellationToken cancellationToken);
     }
 } 

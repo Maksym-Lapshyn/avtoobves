@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using Avtoobves.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -17,10 +18,11 @@ namespace Avtoobves.Controllers
             _configuration = configuration;
         }
 
+        [HttpGet]
         public IActionResult Login() => View(new LoginViewModel());
 
         [HttpPost]
-        public IActionResult Login(LoginViewModel model, string returnUrl)
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -52,10 +54,7 @@ namespace Avtoobves.Controllers
 
             var principal = new ClaimsPrincipal(identity);
 
-            HttpContext
-                .SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal)
-                .GetAwaiter()
-                .GetResult();
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
             return Redirect(returnUrl ?? Url.Action("Index", "Admin"));
         }

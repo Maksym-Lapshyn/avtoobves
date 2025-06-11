@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using Avtoobves.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +14,11 @@ namespace Avtoobves.Controllers
             _blogPostRepository = blogPostRepository;
         }
 
-        public IActionResult Index() => View(_blogPostRepository.BlogPosts);
+        public async Task<IActionResult> Index(CancellationToken cancellationToken)
+        {
+            var blogPosts = await _blogPostRepository.GetBlogPosts(cancellationToken);
+            
+            return View(blogPosts);
+        }
     }
 }

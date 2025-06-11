@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Avtoobves.Infrastructure;
-using Avtoobves.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Avtoobves.Controllers
@@ -16,39 +18,52 @@ namespace Avtoobves.Controllers
             _blogPostRepository = blogPostRepository;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
-            var products = _productRepository
-                .Products
-                .OrderBy(p => p.Category)
-                .ToList();
+            var products = await _productRepository.GetProducts(cancellationToken);
 
             return View(products);
         }
 
-        public IActionResult Product(int id)
+        [HttpGet]
+        public async Task<IActionResult> Product(int id, CancellationToken cancellationToken)
         {
-            var product = _productRepository
-                .Products
-                .FirstOrDefault(p => p.Id == id);
+            var product = await _productRepository.GetProduct(id, cancellationToken);
 
             return View(product);
         }
 
-        public IActionResult Blog()
+        [HttpGet]
+        public async Task<IActionResult> Blog(CancellationToken cancellationToken)
         {
-            var blogPosts = _blogPostRepository.BlogPosts.ToList();
-
+            var blogPosts = await _blogPostRepository.GetBlogPosts(cancellationToken);
+            
             return View(blogPosts);
         }
 
-        public IActionResult BlogPost(string id)
+        [HttpGet]
+        public async Task<IActionResult> BlogPost(Guid id, CancellationToken cancellationToken)
         {
-            var blogPost = _blogPostRepository
-                .BlogPosts
-                .FirstOrDefault(bp => bp.Id.ToString() == id);
+            var blogPost = await _blogPostRepository.GetBlogPost(id, cancellationToken);
 
             return View(blogPost);
+        }
+        
+        [HttpGet]
+        public IActionResult Contacts() => View();
+        
+        [HttpGet]
+        public IActionResult Categories() => View();
+
+        [HttpGet]
+        public async Task<IActionResult> Category(string categoryName, CancellationToken cancellationToken)
+        {
+            // TODO: filter in db
+            var allProducts = await _productRepository.GetProducts(cancellationToken);
+            var category = allProducts.Where(p => p.Category.ToString() == categoryName).ToList();
+
+            return View(category);
         }
     }
 }

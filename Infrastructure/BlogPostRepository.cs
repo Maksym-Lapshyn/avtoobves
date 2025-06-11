@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Amazon.S3.Transfer;
 using Avtoobves.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Jpeg;
@@ -14,46 +16,55 @@ namespace Avtoobves.Infrastructure
 {
     public class BlogPostRepository : BaseRepository, IBlogPostRepository
     {
-        public BlogPostRepository(Context context, IConfiguration configuration) 
-            : base(context, configuration)
+        public BlogPostRepository(Context context, IConfiguration configuration) : base(context, configuration)
         {
         }
 
-        public IEnumerable<BlogPost> BlogPosts => Context.BlogPosts.ToList();
-
-        public BlogPost DeleteBlogPost(Guid id)
+        public Task<List<BlogPost>> GetBlogPosts(CancellationToken cancellationToken)
         {
-            var post = Context.BlogPosts.Find(id);
+            return Context.BlogPosts.ToListAsync(cancellationToken);
+        }
+
+        public async Task<BlogPost> GetBlogPost(Guid id, CancellationToken cancellationToken)
+        {
+            var blogPost = await Context.BlogPosts.FindAsync(id, cancellationToken);
+
+            return blogPost;
+        }
+
+        public async Task<BlogPost> DeleteBlogPost(Guid id)
+        {
+            var post = await Context.BlogPosts.FindAsync(id);
 
             if (post == null)
             {
-                return post;
+                return null;
             }
 
-            DeleteImages(GetFirstBlogPostImageName(post.Id), GetSecondBlogPostImageName(post.Id));
+            await DeleteImagesAsync(GetFirstBlogPostImageName(post.Id), GetSecondBlogPostImageName(post.Id));
             Context.BlogPosts.Remove(post);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync();
 
             return post;
         }
 
-        public void SaveBlogPost(BlogPost newBlogPost, IFormFile firstImage, IFormFile secondImage)
+        public async Task SaveBlogPost(BlogPost newBlogPost, IFormFile firstImage, IFormFile secondImage)
         {
             using var s3Client = CreateS3Client();
             using var transferUtility = CreateTransferUtility(s3Client);
-            var existingPost = Context.BlogPosts.Find(newBlogPost.Id);
+            var existingPost = await Context.BlogPosts.FindAsync(newBlogPost.Id);
 
             if (existingPost == default)
             {
                 newBlogPost.Id = Guid.NewGuid();
                 newBlogPost.CreatedAt = DateTime.UtcNow;
                 newBlogPost.CreatedBy = "Администратор";
-                var (firstImageUrl, secondImageUrl) = UploadBlogPostImages(newBlogPost.Id, firstImage, secondImage, transferUtility);
+                var (firstImageUrl, secondImageUrl) = await UploadBlogPostImagesAsync(newBlogPost.Id, firstImage, secondImage, transferUtility);
                 newBlogPost.FirstImageUrl = firstImageUrl;
                 newBlogPost.SecondImageUrl = secondImageUrl;
 
                 Context.BlogPosts.Add(newBlogPost);
-                Context.SaveChanges();
+                await Context.SaveChangesAsync();
             }
             else
             {
@@ -61,8 +72,8 @@ namespace Avtoobves.Infrastructure
 
                 if (isReplacingImages)
                 {
-                    DeleteImages(GetFirstBlogPostImageName(existingPost.Id), GetSecondBlogPostImageName(existingPost.Id));
-                    var (firstImageUrl, secondImageUrl) = UploadBlogPostImages(newBlogPost.Id, firstImage, secondImage, transferUtility);
+                    await DeleteImagesAsync(GetFirstBlogPostImageName(existingPost.Id), GetSecondBlogPostImageName(existingPost.Id));
+                    var (firstImageUrl, secondImageUrl) = await UploadBlogPostImagesAsync(newBlogPost.Id, firstImage, secondImage, transferUtility);
                     existingPost.FirstImageUrl = firstImageUrl;
                     existingPost.SecondImageUrl = secondImageUrl;
                 }
@@ -75,31 +86,31 @@ namespace Avtoobves.Infrastructure
                 existingPost.SecondParagraphText = newBlogPost.SecondParagraphText;
                 existingPost.ThirdParagraphText = newBlogPost.ThirdParagraphText;
 
-                Context.SaveChanges();
+                await Context.SaveChangesAsync();
             }
         }
 
-        private static (string firstImageUrl, string secondImageUrl) UploadBlogPostImages(
+        private static async Task<(string firstImageUrl, string secondImageUrl)> UploadBlogPostImagesAsync(
             Guid blogPostId,
             IFormFile firstImageFile,
             IFormFile secondImageFile,
             ITransferUtility transferUtility)
         {
             var firstImageName = GetFirstBlogPostImageName(blogPostId);
-            using var fistImageStream = new MemoryStream();
-            using var firstImage = Image.Load(firstImageFile.OpenReadStream());
+            using var firstImageStream = new MemoryStream();
+            using var firstImage = await Image.LoadAsync(firstImageFile.OpenReadStream());
             
             firstImage.Mutate(x => x.Resize(1440, 1080));
-            firstImage.Save(fistImageStream, new JpegEncoder());
-            transferUtility.Upload(fistImageStream, BucketName, firstImageName);
+            await firstImage.SaveAsync(firstImageStream, new JpegEncoder());
+            await transferUtility.UploadAsync(firstImageStream, BucketName, firstImageName);
             
             var secondImageName = GetSecondBlogPostImageName(blogPostId);
             using var secondImageStream = new MemoryStream();
-            using var secondImage = Image.Load(secondImageFile.OpenReadStream());
+            using var secondImage = await Image.LoadAsync(secondImageFile.OpenReadStream());
             
             secondImage.Mutate(x => x.Resize(1440, 1080));
-            secondImage.Save(secondImageStream, new JpegEncoder());
-            transferUtility.Upload(secondImageStream, BucketName, secondImageName);
+            await secondImage.SaveAsync(secondImageStream, new JpegEncoder());
+            await transferUtility.UploadAsync(secondImageStream, BucketName, secondImageName);
             
             var firstImageUrl = $"{CdnAddress}/{firstImageName}";
             var secondImageUrl = $"{CdnAddress}/{secondImageName}";

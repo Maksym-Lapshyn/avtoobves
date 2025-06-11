@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Avtoobves.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
@@ -14,17 +15,18 @@ namespace Avtoobves.ViewComponents
             _productRepository = productRepository;
         }
 
-        public Task<IViewComponentResult> InvokeAsync(int productId, bool left, bool right)
+        public async Task<IViewComponentResult> InvokeAsync(int productId, bool left, bool right, CancellationToken cancellationToken)
         {
-            var product = _productRepository.Products.First(p => p.Id == productId);
+            var products = await _productRepository.GetProducts(cancellationToken);
+            var product = products.First(p => p.Id == productId);
 
-            var products = _productRepository.Products
+            var similarProducts = products
                 .Where(p => p.Category == product.Category)
-                .Skip(_productRepository.GetSimilarProducts(productId, left, right))
+                .Skip(await _productRepository.GetSimilarProductIds(productId, left, right, cancellationToken))
                 .Take(4)
                 .ToList();
 
-            return Task.FromResult<IViewComponentResult>(View(products));
+            return View(similarProducts);
         }
     }
 }
