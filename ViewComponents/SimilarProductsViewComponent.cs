@@ -1,30 +1,32 @@
-using System;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Avtoobves.Infrastructure;
-using Avtoobves.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Avtoobves.ViewComponents
 {
     public class SimilarProductsViewComponent : ViewComponent
     {
-        private readonly IRepository _repository;
+        private readonly IProductRepository _productRepository;
 
-        public SimilarProductsViewComponent(IRepository repository)
+        public SimilarProductsViewComponent(IProductRepository productRepository)
         {
-            _repository = repository;
+            _productRepository = productRepository;
         }
 
-        public IViewComponentResult Invoke(int productId)
+        public async Task<IViewComponentResult> InvokeAsync(int productId, bool left, bool right, CancellationToken cancellationToken)
         {
-            var product = _repository.Products.First(p => p.Id == productId);
+            var products = await _productRepository.GetProducts(cancellationToken);
+            var product = products.First(p => p.Id == productId);
 
-            var products = _repository.Products
+            var similarProducts = products
                 .Where(p => p.Category == product.Category)
-                .Shuffle(new Random())
+                .Skip(await _productRepository.GetSimilarProductsOffset(productId, left, right, cancellationToken))
+                .Take(4)
                 .ToList();
 
-            return View(products);
+            return View(similarProducts);
         }
     }
 }

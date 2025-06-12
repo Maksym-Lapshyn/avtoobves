@@ -1,5 +1,8 @@
 using System;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Avtoobves.Infrastructure;
 using Avtoobves.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -10,106 +13,135 @@ namespace Avtoobves.Controllers
     [Authorize]
     public class AdminController : Controller
     {
-        private readonly IRepository _repository;
+        private readonly IProductRepository _productRepository;
+        private readonly IBlogPostRepository _blogPostRepository;
 
-        public AdminController(IRepository repository)
+        public AdminController(IProductRepository productRepository, IBlogPostRepository blogPostRepository)
         {
-            _repository = repository;
+            _productRepository = productRepository;
+            _blogPostRepository = blogPostRepository;
         }
 
+        [HttpGet]
         public ActionResult Index() => View();
         
-        public ActionResult Products() => View(_repository.Products.ToList());
-
-        public ActionResult BlogPosts() => View(_repository.BlogPosts.ToList());
-
-        public ActionResult EditProduct(int id)
+        [HttpGet]
+        public async Task<IActionResult> Products(CancellationToken cancellationToken)
         {
-            var product = _repository.Products.FirstOrDefault(p => p.Id == id);
+            var products = await _productRepository.GetProducts(cancellationToken);
+            
+            return View(products.ToList());
+        }
 
-            return View(product);
+        [HttpGet]
+        public async Task<IActionResult> BlogPosts(CancellationToken cancellationToken)
+        {
+            var blogPosts = await _blogPostRepository.GetBlogPosts(cancellationToken);
+            
+            return View(blogPosts.ToList());
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditProduct(int? id, CancellationToken cancellationToken)
+        {
+            if (!id.HasValue)
+            {
+                return View(new Product());
+            }
+
+            var products = await _productRepository.GetProducts(cancellationToken);
+            var product = products.FirstOrDefault(p => p.Id == id);
+            
+            return View(product ?? new Product());
         }
         
-        public ActionResult EditBlogPost(Guid id)
+        [HttpGet]
+        public async Task<IActionResult> EditBlogPost(Guid? id, CancellationToken cancellationToken)
         {
-            var blogPost = _repository.BlogPosts.FirstOrDefault(bp => bp.Id == id);
+            if (!id.HasValue)
+            {
+                return View(new BlogPost());
+            }
 
-            return View(blogPost);
+            var blogPosts = await _blogPostRepository.GetBlogPosts(cancellationToken);
+            var blogPost = blogPosts.FirstOrDefault(bp => bp.Id == id);
+            
+            return View(blogPost ?? new BlogPost());
         }
 
         [HttpPost]
-        public ActionResult EditProduct(Product product, IFormFile image)
+        public async Task<IActionResult> SaveProduct(Product product, IFormFile image)
         {
-            var productWithSameName = _repository
-                .Products
-                .FirstOrDefault(p => p.Name.Equals(product.Name, StringComparison.OrdinalIgnoreCase));
+            // TODO: filter in the db
+            var products = await _productRepository.GetProducts(CancellationToken.None);
+            var productWithSameName = products.FirstOrDefault(p => p.Name == product.Name && p.Id != product.Id);
 
-            if (productWithSameName != default)
+            if (productWithSameName != null)
             {
-                ModelState.AddModelError("Name", "Product names cannot repeat!");
+                ModelState.AddModelError("Name", "Товар с таким названием уже существует");
+                
+                return View("EditProduct", product);
             }
 
             if (!ModelState.IsValid)
             {
-                return View(product);
+                return View("EditProduct", product);
             }
 
-            _repository.SaveProduct(product, image);
+            await _productRepository.SaveProduct(product, image);
+            
+            return RedirectToAction("Products");
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> SaveBlogPost(BlogPost blogPost, IFormFile firstImage, IFormFile secondImage)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("EditBlogPost", blogPost);
+            }
 
-            TempData["success"] = $"Товар {product.Name} сохранен";
+            await _blogPostRepository.SaveBlogPost(blogPost, firstImage, secondImage);
+            
+            return RedirectToAction("BlogPosts");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            var deletedProduct = await _productRepository.DeleteProduct(id);
+
+            if (deletedProduct == null)
+            {
+                return NotFound();
+            }
 
             return RedirectToAction("Products");
         }
         
         [HttpPost]
-        public ActionResult EditBlogPost(BlogPost blogPost, IFormFile firstImage, IFormFile secondImage)
+        public async Task<IActionResult> DeleteBlogPost(Guid id)
         {
-            if (!ModelState.IsValid)
+            var deletedBlogPost = await _blogPostRepository.DeleteBlogPost(id);
+
+            if (deletedBlogPost == null)
             {
-                return View(blogPost);
-            }
-
-            _repository.SaveBlogPost(blogPost, firstImage, secondImage);
-
-            TempData["success"] = $"Пост {blogPost.Title} сохранен";
-
-            return RedirectToAction("BlogPosts");
-        }
-
-        [HttpPost]
-        public ActionResult DeleteProduct(int id)
-        {
-            var deleteProduct = _repository.DeleteProduct(id);
-
-            if (deleteProduct != null)
-            {
-                TempData["message"] = $"Товар {deleteProduct.Name} удален";
-            }
-
-            return RedirectToAction("Products");
-        }
-        
-        [HttpPost]
-        public ActionResult DeleteBlogPost(Guid id)
-        {
-            var deletedBlogPost = _repository.DeleteBlogPost(id);
-
-            if (deletedBlogPost != null)
-            {
-                TempData["message"] = $"Пост {deletedBlogPost.Title} удален";
+                return NotFound();
             }
 
             return RedirectToAction("BlogPosts");
         }
 
-        public ActionResult CreateProduct()
+        [HttpGet]
+        public IActionResult CreateProduct()
         {
             ViewBag.New = true;
 
             return View("EditProduct", new Product());
         }
         
-        public ActionResult CreateBlogPost()
+        [HttpGet]
+        public IActionResult CreateBlogPost()
         {
             ViewBag.New = true;
 

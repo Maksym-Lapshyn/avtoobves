@@ -11,10 +11,10 @@ namespace Avtoobves.Models
         
         public DateTime CreatedAt { get; set; }
         
-        [Required(ErrorMessage = "Enter ShortTitle!")]
+        [Required(ErrorMessage = "Enter Title!")]
         public string Title { get; set; }
         
-        [Required(ErrorMessage = "Enter LongTitle!")]
+        [Required(ErrorMessage = "Enter Description!")]
         public string Description { get; set; }
         
         public string FirstImageUrl { get; set; }

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Avtoobves.Models;
 
-namespace Avtoobves.Models
+namespace Avtoobves.Infrastructure
 {
     public class Context : DbContext
     {
