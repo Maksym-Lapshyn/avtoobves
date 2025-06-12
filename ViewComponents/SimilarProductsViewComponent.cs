@@ -22,7 +22,7 @@ namespace Avtoobves.ViewComponents
 
             var similarProducts = products
                 .Where(p => p.Category == product.Category)
-                .Skip(await _productRepository.GetSimilarProductIds(productId, left, right, cancellationToken))
+                .Skip(await _productRepository.GetSimilarProductsOffset(productId, left, right, cancellationToken))
                 .Take(4)
                 .ToList();
 

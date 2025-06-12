@@ -84,9 +84,14 @@ namespace Avtoobves.Infrastructure
             await Context.SaveChangesAsync();
         }
 
-        public async Task<int> GetSimilarProductIds(int productId, bool left, bool right, CancellationToken cancellationToken)
+        public async Task<int> GetSimilarProductsOffset(int productId, bool left, bool right, CancellationToken cancellationToken)
         {
-            var product = await Context.Products.FindAsync(productId);
+            var product = await Context.Products.FindAsync(productId, cancellationToken);
+
+            if (product == null)
+            {
+                return 0;
+            }
 
             var products = await Context
                 .Products

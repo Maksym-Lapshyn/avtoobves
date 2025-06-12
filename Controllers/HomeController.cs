@@ -19,12 +19,7 @@ namespace Avtoobves.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(CancellationToken cancellationToken)
-        {
-            var products = await _productRepository.GetProducts(cancellationToken);
-
-            return View(products);
-        }
+        public IActionResult Index() => View();
 
         [HttpGet]
         public async Task<IActionResult> Product(int id, CancellationToken cancellationToken)

@@ -16,6 +16,6 @@ namespace Avtoobves.Infrastructure
 
         Task SaveProduct(Product product, IFormFile image);
 
-        Task<int> GetSimilarProductIds(int productId, bool left, bool right, CancellationToken cancellationToken);
+        Task<int> GetSimilarProductsOffset(int productId, bool left, bool right, CancellationToken cancellationToken);
     }
 } 
