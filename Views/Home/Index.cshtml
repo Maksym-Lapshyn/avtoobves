@@ -1,13 +1,13 @@
 ﻿@{
-    ViewBag.Title = "Обвес из нержавейки в Харькове - кенгурятники, пороги, дуги пикапов и ремонт изделий из нержавеющей стали под заказ";
+    ViewBag.Title = Localizer["PageTitle"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <section class="welcome">
     <div class="container text-center">
         <div class="text-welcome wow fadeInUp delay-01s">
-            <h3 class="title">Авто Обвес</h3>
-            <h1>Изготовление и ремонт первоклассного обвеса, а также прочих изделий из нержавеющей стали под заказ</h1>
+            <h3 class="title">@Localizer["HeroTitle"]</h3>
+            <h1>@Localizer["HeroSubtitle"]</h1>
         </div>
     </div>
 </section>
@@ -86,18 +86,17 @@
                 </div><!-- /clearfix -->
             </div> <!-- /col-sm-6 -->
             <div class="col-sm-6 wow fadeInRight delay-01s">
-                <h1 class="visible-md visible-lg">Обвес из нержавейки</h1>
-                <h1 class="text-center visible-sm visible-xs">Силовой обвес из нержавейки</h1>
-                <h3 class="visible-md visible-lg">Что это такое?</h3>
-                <h3 class="text-center visible-sm visible-xs">Что это такое?</h3>
+                <h1 class="visible-md visible-lg">@Localizer["HeroTitleLarge"]</h1>
+                <h1 class="text-center visible-sm visible-xs">@Localizer["HeroTitleSmall"]</h1>
+                <h3 class="visible-md visible-lg">@Localizer["AboutTitle"]</h3>
+                <h3 class="text-center visible-sm visible-xs">@Localizer["AboutTitle"]</h3>
                 <hr class="visible-md visible-lg"/>
                 <hr class="hr-center visible-sm visible-xs"/>
-                <p>Такое изделие как кенгурятник, окантовка из нержавейки, пороги, защита дуг для пикапов и силовой бампер типа АРБ – это то, что придаст Вашему автомобилю изящества, а также обезопасит сам процесс вождения.</p>
-                <p>Кенгурятник (передняя защита) – конструкция из нержавеющей стали, которую устанавливают спереди автомобиля, чтобы защитить передний бампер и капот от прямых повреждений при прохождении пересеченной местности, а также при вождении внутри города.</p>
-                <p>Окантовки из нержавеющей стали (задние защиты) – сооружение из нержавеющих труб, которое крепится с задней стороны кузова и защищает его целостность. Лучшая защита при парковке и заезде в гараж.</p>
-                <p>Пороги и подпорожники из нержавейки – это трубы и ступени, которые защищают от боковых повреждений кузова и упрощают доступ как внутрь салона, так и к крыше Вашего автомобиля.</p>
-                <p>В наших руках, благодаря технологиям и опыту, любое изделие из нержавеющей стали превращается в настоящее произведение искусства, владельцем которого становитесь именно Вы.</p>
-
+                <p>@Localizer["AboutTextParagraph1"]</p>
+                <p>@Localizer["AboutTextParagraph2"]</p>
+                <p>@Localizer["AboutTextParagraph3"]</p>
+                <p>@Localizer["AboutTextParagraph4"]</p>
+                <p>@Localizer["AboutTextParagraph5"]</p>
             </div> <!-- /col-sm-6 -->
         </div> <!-- /row -->
     </div> <!-- /container -->
@@ -108,12 +107,16 @@
         <div class="row">
             <div class="col-lg-6 col-sm-12 text-center">
                 <div class="scroller-text">
-                    <h3>Каталог работ</h3>
-                    <h1>Ознакомиться с примерами работ Вы можете в нашем портфолио. В нем Вы найдете кенгурятники, окантовки, задние защиты, пороги, дуги пикапов, и прочие изделия из высококачественной нержавеющей стали</h1>
+                    <h3>@Localizer["LatestWorksTitle"]</h3>
+                    <h1>@Localizer["LatestWorksDescription"]</h1>
                 </div>
             </div>
             <div class="col-lg-6 col-sm-12 text-center">
-                <h4>@Html.ActionLink("Перейти к каталогу работ", "Categories", new { }, new { @class = "ghost-button" })</h4>
+                @{
+                    var currentPath = Context.Request.Path.Value;
+                    var currentCulture = currentPath.StartsWith("/uk/") || currentPath == "/uk" ? "uk" : "ru";
+                }
+                <h4><a href="@Url.Action("Categories", "Home", new { culture = currentCulture })" class="ghost-button">@Localizer["ViewAllWorks"]</a></h4>
             </div>
         </div>
     </div>
@@ -123,49 +126,49 @@
     <div class="container">
         <div class="row">
             <div class="benefits-wrapper col-md-6 col-xs-12 wow fadeInLeft delay-01s">
-                <h1 class="txt-tl">Дизайн</h1>
+                <h1 class="txt-tl">@Localizer["Service1Title"]</h1>
                 <div class="benefit">
                     <div class="benefit-left">
                         <img src="https://d1ucqhcti31ovy.cloudfront.net/general/design.png"/>
                     </div>
                     <div class="benefit-right">
-                        <p>Эксклюзивный дизайн – это то, что подчеркивает Вашу индивидуальность и выделяет Ваше авто из общей массы. Уникальность наших изделий заключается в том, что мы делаем не то, что удобно нам, а то, чего хотите Вы сами. Вы можете создать дизайн вместе с нами, либо же подобрать его самостоятельно</p>
+                        <p>@Localizer["Service1Description"]</p>
                     </div>
                 </div>
             </div>
 
             <div class="benefits-wrapper col-md-6 col-xs-12 wow fadeInRight delay-01s">
-                <h1 class="txt-tl">Материал</h1>
+                <h1 class="txt-tl">@Localizer["Service2Title"]</h1>
                 <div class="benefit">
                     <div class="benefit-left">
                         <img src="https://d1ucqhcti31ovy.cloudfront.net/general/material.png"/>
                     </div>
                     <div class="benefit-right">
-                        <p>В изделиях из нержавеющей стали важную роль играет качество сырья, влияющее как на их внешний вид, так и на износоустойчивость. Поэтому, работая с хорошим, сертифицированным материалом, не подвергающимся коррозии (пищевая нержавейка), мы гарантируем высокое качество и долговечность наших изделий</p>
+                        <p>@Localizer["Service2Description"]</p>
                     </div>
                 </div>
             </div>
 
             <div class="benefits-wrapper col-md-6 col-xs-12 wow fadeInLeft delay-01s">
-                <h1 class="txt-tl">Установка</h1>
+                <h1 class="txt-tl">@Localizer["Service3Title"]</h1>
                 <div class="benefit">
                     <div class="benefit-left">
                         <img src="https://d1ucqhcti31ovy.cloudfront.net/general/setup.png"/>
                     </div>
                     <div class="benefit-right">
-                        <p>После покупки обвеса из нержавеющей стали, на плечи покупателя ложится задача по его установке. Однако, без надлежащих знаний, оборудования и опыта, эта задача может оказаться не из простых. Работая с нами, Вам не нужно заботиться о монтаже обвеса на Ваш автомобиль будь то наше изделие, или же работа, сделанная иным производителем</p>
+                        <p>@Localizer["Service3Description"]</p>
                     </div>
                 </div>
             </div>
 
             <div class="benefits-wrapper col-md-6 col-xs-12 wow fadeInRight delay-01s">
-                <h1 class="txt-tl">Ремонт</h1>
+                <h1 class="txt-tl">@Localizer["Service4Title"]</h1>
                 <div class="benefit">
                     <div class="benefit-left">
                         <img src="https://d1ucqhcti31ovy.cloudfront.net/general/repair.png"/>
                     </div>
                     <div class="benefit-right">
-                        <p>В случае деформации обвеса, не спешите выбрасывать его на металлолом. Почти всегда, обладая необходимыми технологиями и навыками, его можно восстановить. Мы готовы прийти к Вам на помощь в любое время, сэкономив Ваши деньги и время</p>
+                        <p>@Localizer["Service4Description"]</p>
                     </div>
                 </div>
             </div>

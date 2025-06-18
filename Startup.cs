@@ -1,12 +1,14 @@
-using Avtoobves.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Avtoobves.Infrastructure;
+using System.Globalization;
+using Avtoobves.Middleware;
 
 namespace Avtoobves
 {
@@ -17,14 +19,20 @@ namespace Avtoobves
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
             var connection = Configuration.GetConnectionString("AvtoobvesDatabase");
 
             services.AddDbContext<Context>(options => options.UseSqlServer(connection));
-            services.AddControllersWithViews();
+            
+            // Add localization services
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+            
+            services.AddControllersWithViews()
+                .AddViewLocalization()
+                .AddDataAnnotationsLocalization();
 
             services
                 .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -46,17 +54,43 @@ namespace Avtoobves
                 app.UseHsts();
             }
             
+            // Configure supported cultures
+            var supportedCultures = new[]
+            {
+                new CultureInfo("ru"), // Russian as default
+                new CultureInfo("uk")  // Ukrainian
+            };
+
+            // Configure request localization (mainly for validation)
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("ru"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
+            
+            // Add custom culture middleware after routing
+            app.UseMiddleware<CultureMiddleware>();
+            
             app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
+                // Culture-specific routes for both Russian and Ukrainian
                 endpoints.MapControllerRoute(
-                    "default",
-                    "{controller=Home}/{action=Index}/{id?}");
+                    name: "localized",
+                    pattern: "{culture:regex(^(ru|uk)$)}/{controller=Home}/{action=Index}/{id?}");
+                
+                // Default route redirects to Russian
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}",
+                    defaults: new { culture = "ru" });
             });
         }
     }

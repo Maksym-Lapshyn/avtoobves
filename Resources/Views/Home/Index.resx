@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Обвес из нержавейки в Харькове - кенгурятники, пороги, дуги пикапов и ремонт изделий из нержавеющей стали под заказ</value>
+  </data>
+  <data name="HeroTitle" xml:space="preserve">
+    <value>Авто Обвес</value>
+  </data>
+  <data name="HeroSubtitle" xml:space="preserve">
+    <value>Изготовление и ремонт первоклассного обвеса, а также прочих изделий из нержавеющей стали под заказ</value>
+  </data>
+  <data name="HeroTitleLarge" xml:space="preserve">
+    <value>Обвес из нержавейки</value>
+  </data>
+  <data name="HeroTitleSmall" xml:space="preserve">
+    <value>Силовой обвес из нержавейки</value>
+  </data>
+  <data name="AboutTitle" xml:space="preserve">
+    <value>Что это такое?</value>
+  </data>
+  <data name="AboutText" xml:space="preserve">
+    <value>Такое изделие как кенгурятник, окантовка из нержавейки, пороги, защита дуг для пикапов и силовой бампер типа АРБ – это то, что придаст Вашему автомобилю изящества, а также обезопасит сам процесс вождения. Кенгурятник (передняя защита) – конструкция из нержавеющей стали, которую устанавливают спереди автомобиля, чтобы защитить передний бампер и капот от прямых повреждений при прохождении пересеченной местности, а также при вождении внутри города. Окантовки из нержавеющей стали (задние защиты) – сооружение из нержавеющих труб, которое крепится с задней стороны кузова и защищает его целостность. Лучшая защита при парковке и заезде в гараж. Пороги и подпорожники из нержавейки – это трубы и ступени, которые защищают от боковых повреждений кузова и упрощают доступ как внутрь салона, так и к крыше Вашего автомобиля. В наших руках, благодаря технологиям и опыту, любое изделие из нержавеющей стали превращается в настоящее произведение искусства, владельцем которого становитесь именно Вы.</value>
+  </data>
+  <data name="AboutTextParagraph1" xml:space="preserve">
+    <value>Такое изделие как кенгурятник, окантовка из нержавейки, пороги, защита дуг для пикапов и силовой бампер типа АРБ – это то, что придаст Вашему автомобилю изящества, а также обезопасит сам процесс вождения.</value>
+  </data>
+  <data name="AboutTextParagraph2" xml:space="preserve">
+    <value>Кенгурятник (передняя защита) – конструкция из нержавеющей стали, которую устанавливают спереди автомобиля, чтобы защитить передний бампер и капот от прямых повреждений при прохождении пересеченной местности, а также при вождении внутри города.</value>
+  </data>
+  <data name="AboutTextParagraph3" xml:space="preserve">
+    <value>Окантовки из нержавеющей стали (задние защиты) – сооружение из нержавеющих труб, которое крепится с задней стороны кузова и защищает его целостность. Лучшая защита при парковке и заезде в гараж.</value>
+  </data>
+  <data name="AboutTextParagraph4" xml:space="preserve">
+    <value>Пороги и подпорожники из нержавейки – это трубы и ступени, которые защищают от боковых повреждений кузова и упрощают доступ как внутрь салона, так и к крыше Вашего автомобиля.</value>
+  </data>
+  <data name="AboutTextParagraph5" xml:space="preserve">
+    <value>В наших руках, благодаря технологиям и опыту, любое изделие из нержавеющей стали превращается в настоящее произведение искусства, владельцем которого становитесь именно Вы.</value>
+  </data>
+  <data name="LatestWorksTitle" xml:space="preserve">
+    <value>Каталог работ</value>
+  </data>
+  <data name="LatestWorksDescription" xml:space="preserve">
+    <value>Ознакомиться с примерами работ Вы можете в нашем портфолио. В нем Вы найдете кенгурятники, окантовки, задние защиты, пороги, дуги пикапов, и прочие изделия из высококачественной нержавеющей стали</value>
+  </data>
+  <data name="ViewAllWorks" xml:space="preserve">
+    <value>Перейти к каталогу работ</value>
+  </data>
+  <data name="Service1Title" xml:space="preserve">
+    <value>Дизайн</value>
+  </data>
+  <data name="Service1Description" xml:space="preserve">
+    <value>Эксклюзивный дизайн – это то, что подчеркивает Вашу индивидуальность и выделяет Ваше авто из общей массы. Уникальность наших изделий заключается в том, что мы делаем не то, что удобно нам, а то, чего хотите Вы сами. Вы можете создать дизайн вместе с нами, либо же подобрать его самостоятельно</value>
+  </data>
+  <data name="Service2Title" xml:space="preserve">
+    <value>Материал</value>
+  </data>
+  <data name="Service2Description" xml:space="preserve">
+    <value>В изделиях из нержавеющей стали важную роль играет качество сырья, влияющее как на их внешний вид, так и на износоустойчивость. Поэтому, работая с хорошим, сертифицированным материалом, не подвергающимся коррозии (пищевая нержавейка), мы гарантируем высокое качество и долговечность наших изделий</value>
+  </data>
+  <data name="Service3Title" xml:space="preserve">
+    <value>Установка</value>
+  </data>
+  <data name="Service3Description" xml:space="preserve">
+    <value>После покупки обвеса из нержавеющей стали, на плечи покупателя ложится задача по его установке. Однако, без надлежащих знаний, оборудования и опыта, эта задача может оказаться не из простых. Работая с нами, Вам не нужно заботиться о монтаже обвеса на Ваш автомобиль будь то наше изделие, или же работа, сделанная иным производителем</value>
+  </data>
+  <data name="Service4Title" xml:space="preserve">
+    <value>Ремонт</value>
+  </data>
+  <data name="Service4Description" xml:space="preserve">
+    <value>В случае деформации обвеса, не спешите выбрасывать его на металлолом. Почти всегда, обладая необходимыми технологиями и навыками, его можно восстановить. Мы готовы прийти к Вам на помощь в любое время, сэкономив Ваши деньги и время</value>
+  </data>
+</root> 

@@ -28,7 +28,7 @@ namespace Avtoobves.Infrastructure
 
         public async Task<Product> GetProduct(int id, CancellationToken cancellationToken)
         {
-            var product = await Context.Products.FindAsync(id, cancellationToken);
+            var product = await Context.Products.FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
 
             return product;
         }
@@ -86,7 +86,7 @@ namespace Avtoobves.Infrastructure
 
         public async Task<int> GetSimilarProductsOffset(int productId, bool left, bool right, CancellationToken cancellationToken)
         {
-            var product = await Context.Products.FindAsync(productId, cancellationToken);
+            var product = await Context.Products.FirstOrDefaultAsync(p => p.Id == productId, cancellationToken);
 
             if (product == null)
             {
