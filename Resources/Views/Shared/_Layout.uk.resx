@@ -58,37 +58,46 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="SiteTitle" xml:space="preserve">
-    <value>Автообвеси</value>
+  <data name="MetaDescription" xml:space="preserve">
+    <value>Кенгурятники, окантовки, задні захисти, пороги, дуги пікапів, та інші вироби з високоякісної нержавіючої сталі під замовлення в Харкові. Доставка по всій Україні.</value>
+  </data>
+  <data name="MetaKeywords" xml:space="preserve">
+    <value>обвіс, кенгурятник, пороги, нержавійка, захист бампера, обвіс Харків, кузовні дуги</value>
+  </data>
+  <data name="BrandName" xml:space="preserve">
+    <value>Автообвіс</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>Головна</value>
   </data>
-  <data name="Categories" xml:space="preserve">
-    <value>Категорії</value>
-  </data>
-  <data name="Blog" xml:space="preserve">
-    <value>Блог</value>
+  <data name="OurWorks" xml:space="preserve">
+    <value>Наші роботи</value>
   </data>
   <data name="Contacts" xml:space="preserve">
     <value>Контакти</value>
   </data>
-  <data name="Admin" xml:space="preserve">
-    <value>Адмін</value>
-  </data>
-  <data name="Login" xml:space="preserve">
-    <value>Вхід</value>
-  </data>
-  <data name="Logout" xml:space="preserve">
-    <value>Вихід</value>
+  <data name="Blog" xml:space="preserve">
+    <value>Блог</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Мова</value>
   </data>
-  <data name="Russian" xml:space="preserve">
-    <value>Російська</value>
+  <data name="AllRightsReserved" xml:space="preserve">
+    <value>Всі права захищені avtoobves.com.ua©</value>
   </data>
-  <data name="Ukrainian" xml:space="preserve">
-    <value>Українська</value>
+  <data name="CreatedBy" xml:space="preserve">
+    <value>This website is created by maxon_adc</value>
+  </data>
+  <data name="IconsBy" xml:space="preserve">
+    <value>Icons made by Freepik from</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Адреса</value>
+  </data>
+  <data name="KharkivUkraine" xml:space="preserve">
+    <value>Харків, Україна</value>
+  </data>
+  <data name="StreetAddress" xml:space="preserve">
+    <value>Вулиця Григорівська 66/2</value>
   </data>
 </root> 

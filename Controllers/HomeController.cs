@@ -4,6 +4,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Avtoobves.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Http;
 
 namespace Avtoobves.Controllers
 {
@@ -59,6 +61,18 @@ namespace Avtoobves.Controllers
             var category = allProducts.Where(p => p.Category.ToString() == categoryName).ToList();
 
             return View(category);
+        }
+
+        [HttpGet]
+        public IActionResult SetLanguage(string culture, string returnUrl)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+            );
+
+            return LocalRedirect(returnUrl);
         }
     }
 }

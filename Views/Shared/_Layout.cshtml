@@ -1,11 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@inject IViewLocalizer Localizer
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@ViewBag.Title</title>
-    <meta name="description" content="Кенгурятники, окантовки, задние защиты, пороги, дуги пикапов, и прочие изделия из высококачественной нержавеющей стали под заказ в Харькове. Доставка по всей Украине.">
-    <meta name="keywords" content="обвес, кенгурятник, пороги, нержавейка, защита бампера, обвес Харьков, кузовные дуги">
+    <meta name="description" content="@Localizer["MetaDescription"]">
+    <meta name="keywords" content="@Localizer["MetaKeywords"]">
     <link rel="icon" href="~/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="~/css/site.css"/>
     <link rel="stylesheet" href="~/css/animate.css"/>
@@ -40,15 +42,24 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="@Url.Action("Index", "Home")" class="navbar-brand">Автообвес</a>
+                    <a href="@Url.Action("Index", "Home")" class="navbar-brand">@Localizer["BrandName"]</a>
                 </div>
                 <div class="collapse navbar-collapse navbar-right" id="mynavbar">
                     <ul class="nav navbar-nav">
                         <li><a href="tel:097-461-50-35">097-461-50-35</a></li>
-                        <li>@Html.ActionLink("Главная", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Наши работы", "Categories", "Home")</li>
-                        <li>@Html.ActionLink("Контакты", "Contacts", "Home")</li>
-                        <li>@Html.ActionLink("Блог", "Blog", "Home")</li>
+                        <li>@Html.ActionLink(Localizer["Home"].Value, "Index", "Home")</li>
+                        <li>@Html.ActionLink(Localizer["OurWorks"].Value, "Categories", "Home")</li>
+                        <li>@Html.ActionLink(Localizer["Contacts"].Value, "Contacts", "Home")</li>
+                        <li>@Html.ActionLink(Localizer["Blog"].Value, "Blog", "Home")</li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                @Localizer["Language"] <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("SetLanguage", "Home", new { culture = "ru", returnUrl = Context.Request.Path + Context.Request.QueryString })">Русский</a></li>
+                                <li><a href="@Url.Action("SetLanguage", "Home", new { culture = "uk", returnUrl = Context.Request.Path + Context.Request.QueryString })">Українська</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -62,17 +73,17 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-6 contacts-wrapper">
-                <p>Все права защищены avtoobves.com.ua&copy;</p>
-                <p>This website is created by maxon_adc</p>
-                <p>Icons made by Freepik from <a class="anchor-reverse" href="http://www.flaticon.com/">www.flaticon.com</a></p>
+                <p>@Localizer["AllRightsReserved"]</p>
+                <p>@Localizer["CreatedBy"]</p>
+                <p>@Localizer["IconsBy"] <a class="anchor-reverse" href="http://www.flaticon.com/">www.flaticon.com</a></p>
             </div>
             <div class="col-xs-12 col-sm-3 contacts-wrapper">
-                <p><span class="glyphicon glyphicon-flag"></span> Адрес:</p>
-                <p>Харьков, Украина</p>
-                <p>Улица Григоровская 66/2</p>
+                <p><span class="glyphicon glyphicon-flag"></span> @Localizer["Address"]:</p>
+                <p>@Localizer["KharkivUkraine"]</p>
+                <p>@Localizer["StreetAddress"]</p>
             </div>
             <div class="col-xs-12 col-sm-3 contacts-wrapper">
-                <p><span class="address-icon glyphicon glyphicon-phone-alt"></span> Контакты:</p>
+                <p><span class="address-icon glyphicon glyphicon-phone-alt"></span> @Localizer["Contacts"]:</p>
                 <p><a href="tel:097-461-50-35">097-461-50-35 (Киевстар)</a></p>
                 <p><a href="mailto:info@avtoobves.com.ua">info@avtoobves.com.ua</a></p>
             </div>
