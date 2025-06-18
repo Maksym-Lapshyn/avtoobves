@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="MetaDescription" xml:space="preserve">
+    <value>Кенгурятники, обкантовки, задні захисти, пороги, дуги пікапів та інші вироби з високоякісної нержавіючої сталі на замовлення в Харкові. Доставка по всій Україні.</value>
+  </data>
+  <data name="MetaKeywords" xml:space="preserve">
+    <value>обвіс, кенгурятник, пороги, нержавійка, захист бампера, обвіс Харків, кузовні дуги</value>
+  </data>
+  <data name="BrandName" xml:space="preserve">
+    <value>Автообвес</value>
+  </data>
+  <data name="NavHome" xml:space="preserve">
+    <value>Головна</value>
+  </data>
+  <data name="NavWorks" xml:space="preserve">
+    <value>Наші роботи</value>
+  </data>
+  <data name="NavContacts" xml:space="preserve">
+    <value>Контакти</value>
+  </data>
+  <data name="NavBlog" xml:space="preserve">
+    <value>Блог</value>
+  </data>
+  <data name="LanguageDropdown" xml:space="preserve">
+    <value>Мова</value>
+  </data>
+  <data name="RussianLanguage" xml:space="preserve">
+    <value>Російська</value>
+  </data>
+  <data name="UkrainianLanguage" xml:space="preserve">
+    <value>Українська</value>
+  </data>
+  <data name="FooterRights" xml:space="preserve">
+    <value>Всі права захищені avtoobves.com.ua©</value>
+  </data>
+  <data name="FooterCreatedBy" xml:space="preserve">
+    <value>This website is created by maxon_adc</value>
+  </data>
+  <data name="FooterIconsBy" xml:space="preserve">
+    <value>Icons made by Freepik from</value>
+  </data>
+  <data name="FooterAddress" xml:space="preserve">
+    <value>Адреса:</value>
+  </data>
+  <data name="FooterCity" xml:space="preserve">
+    <value>Харків, Україна</value>
+  </data>
+  <data name="FooterStreet" xml:space="preserve">
+    <value>Вулиця Григорівська 66/2</value>
+  </data>
+  <data name="FooterContacts" xml:space="preserve">
+    <value>Контакти:</value>
+  </data>
+  <data name="FooterPhone" xml:space="preserve">
+    <value>097-461-50-35 (Київстар)</value>
+  </data>
+</root> 

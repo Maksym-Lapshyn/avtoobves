@@ -2,6 +2,8 @@
 
 @{
     var first = false;
+    var currentPath = Context.Request.Path.Value;
+    var currentCulture = currentPath.StartsWith("/uk/") || currentPath == "/uk" ? "uk" : "ru";
 }
 
 <div class="col-xs-12 wow fadeInUp delay-01s">
@@ -13,9 +15,9 @@
                 {
                     <div class="item active">
                         <div class="col-md-3 col-xs-6">
-                            <a href="@Url.Action("Product", "Home", new { productId = product.Id })">
+                            <a href="@Url.Action("Product", "Home", new { culture = currentCulture, productId = product.Id })">
                                 <div class="portfolio-box">
-                                    <img src="@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
+                                    <img src="@product.SmallImage" alt="@product.Name" class="img-responsive">
                                     <div class="portfolio-box-caption">
                                         <div class="portfolio-box-caption-content-smaller">
                                             <h1>@product.Name</h1>
@@ -31,9 +33,9 @@
                 {
                     <div class="item">
                         <div class="col-md-3 col-xs-6">
-                            <a href="@Url.Action("Product", "Home", new { productId = product.Id })">
+                            <a href="@Url.Action("Product", "Home", new { culture = currentCulture, productId = product.Id })">
                                 <div class="portfolio-box">
-                                    <img src="@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
+                                    <img src="@product.SmallImage" alt="@product.Name" class="img-responsive">
                                     <div class="portfolio-box-caption">
                                         <div class="portfolio-box-caption-content-smaller">
                                             <h1>@product.Name</h1>

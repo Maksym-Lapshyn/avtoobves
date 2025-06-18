@@ -19,12 +19,15 @@ namespace Avtoobves.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index() => View();
+        public IActionResult Index()
+        {
+            return View();
+        }
 
         [HttpGet]
-        public async Task<IActionResult> Product(int id, CancellationToken cancellationToken)
+        public async Task<IActionResult> Product(int productId, CancellationToken cancellationToken = default)
         {
-            var product = await _productRepository.GetProduct(id, cancellationToken);
+            var product = await _productRepository.GetProduct(productId, cancellationToken);
 
             return View(product);
         }
@@ -38,7 +41,7 @@ namespace Avtoobves.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> BlogPost(Guid id, CancellationToken cancellationToken)
+        public async Task<IActionResult> BlogPost(Guid id, CancellationToken cancellationToken) 
         {
             var blogPost = await _blogPostRepository.GetBlogPost(id, cancellationToken);
 
@@ -46,10 +49,16 @@ namespace Avtoobves.Controllers
         }
         
         [HttpGet]
-        public IActionResult Contacts() => View();
+        public IActionResult Contacts()
+        {
+            return View();
+        }
         
         [HttpGet]
-        public IActionResult Categories() => View();
+        public IActionResult Categories()
+        {
+            return View();
+        }
 
         [HttpGet]
         public async Task<IActionResult> Category(string categoryName, CancellationToken cancellationToken)
@@ -59,6 +68,29 @@ namespace Avtoobves.Controllers
             var category = allProducts.Where(p => p.Category.ToString() == categoryName).ToList();
 
             return View(category);
+        }
+
+        [HttpGet]
+        public IActionResult SetLanguage(string culture, string returnUrl)
+        {
+            // Parse the return URL to extract route values
+            var uri = new Uri(returnUrl, UriKind.RelativeOrAbsolute);
+            var path = uri.IsAbsoluteUri ? uri.AbsolutePath : returnUrl;
+            
+            // Remove leading slash and split path segments
+            var segments = path.TrimStart('/').Split('/').Where(s => !string.IsNullOrEmpty(s)).ToArray();
+            
+            // Remove existing culture prefix if present
+            if (segments.Length > 0 && (segments[0] == "ru" || segments[0] == "uk"))
+            {
+                segments = segments.Skip(1).ToArray();
+            }
+            
+            // Add new culture prefix
+            segments = new[] { culture }.Concat(segments).ToArray();
+            var newPath = "/" + string.Join("/", segments);
+            
+            return LocalRedirect(newPath);
         }
     }
 }

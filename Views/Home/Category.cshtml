@@ -3,15 +3,17 @@
 @{
     var categoryName = Model.First().Category.ToString() switch
     {
-        "Front" => "Передние защиты",
-        "Rear" => "Задние защиты",
-        "Footer" => "Пороги",
-        _ => "Прочее"
+        "Front" => Localizer["CategoryFront"],
+        "Rear" => Localizer["CategoryRear"],
+        "Footer" => Localizer["CategoryFooter"],
+        _ => Localizer["CategoryOther"]
     };
 
-    ViewBag.Title = $"Обвес из нержавейки в Харькове - {categoryName}";
+    ViewBag.Title = $"{Localizer["PageTitlePrefix"]} {categoryName}";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var count = 0;
+    var currentPath = Context.Request.Path.Value;
+    var currentCulture = currentPath.StartsWith("/uk/") || currentPath == "/uk" ? "uk" : "ru";
 }
 
 <section class="site-content categories">
@@ -27,9 +29,9 @@
                 if (count == 0)
                 {
                     <div class="col-md-4 col-xs-6 wow fadeInLeft delay-01s">
-                        <a href="@Url.Action("Product", "Home", new { productId = product.Id })">
+                        <a href="@Url.Action("Product", "Home", new { culture = currentCulture, productId = product.Id })">
                             <div class="portfolio-box">
-                                <img src="@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
+                                <img src="@product.SmallImage" alt="@product.Name" class="img-responsive">
                                 <div class="portfolio-box-caption">
                                     <div class="portfolio-box-caption-content">
                                         <h1>@product.Name</h1>
@@ -42,9 +44,9 @@
                 else if (product == Model[1])
                 {
                     <div class="col-md-4 col-xs-6 wow fadeInDown delay-01s">
-                        <a href="@Url.Action("Product", "Home", new { productId = product.Id })">
+                        <a href="@Url.Action("Product", "Home", new { culture = currentCulture, productId = product.Id })">
                             <div class="portfolio-box">
-                                <img src="@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
+                                <img src="@product.SmallImage" alt="@product.Name" class="img-responsive">
                                 <div class="portfolio-box-caption">
                                     <div class="portfolio-box-caption-content">
                                         <h1>@product.Name</h1>
@@ -57,9 +59,9 @@
                 else if (product != Model[1] && product != Model[4] && count == 1)
                 {
                     <div class="col-md-4 col-xs-6 wow fadeInUp delay-01s">
-                        <a href="@Url.Action("Product", "Home", new { productId = product.Id })">
+                        <a href="@Url.Action("Product", "Home", new { culture = currentCulture, productId = product.Id })">
                             <div class="portfolio-box">
-                                <img src="@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
+                                <img src="@product.SmallImage" alt="@product.Name" class="img-responsive">
                                 <div class="portfolio-box-caption">
                                     <div class="portfolio-box-caption-content">
                                         <h1>@product.Name</h1>
@@ -69,12 +71,12 @@
                         </a>
                     </div>
                 }
-                else if (product == Model[Model.Count - 2] && count == 1)
+                else if (product == Model[^2] && count == 1)
                 {
                     <div class="col-md-4 col-xs-6 wow fadeInUp delay-01s">
-                        <a href="@Url.Action("Product", "Home", new { productId = product.Id })">
+                        <a href="@Url.Action("Product", "Home", new { culture = currentCulture, productId = product.Id })">
                             <div class="portfolio-box">
-                                <img src="@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
+                                <img src="@product.SmallImage" alt="@product.Name" class="img-responsive">
                                 <div class="portfolio-box-caption">
                                     <div class="portfolio-box-caption-content">
                                         <h1>@product.Name</h1>
@@ -84,12 +86,12 @@
                         </a>
                     </div>
                 }
-                else if (product == Model[Model.Count - 1] && count == 1)
+                else if (product == Model[^1] && count == 1)
                 {
                     <div class="col-md-4 col-xs-6 wow fadeInUp delay-01s">
-                        <a href="@Url.Action("Product", "Home", new { productId = product.Id })">
+                        <a href="@Url.Action("Product", "Home", new { culture = currentCulture, productId = product.Id })">
                             <div class="portfolio-box">
-                                <img src="@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
+                                <img src="@product.SmallImage" alt="@product.Name" class="img-responsive">
                                 <div class="portfolio-box-caption">
                                     <div class="portfolio-box-caption-content">
                                         <h1>@product.Name</h1>
@@ -102,9 +104,9 @@
                 else if (count == 2)
                 {
                     <div class="col-md-4 col-xs-6 wow fadeInRight delay-01s">
-                        <a href="@Url.Action("Product", "Home", new { productId = product.Id })">
+                        <a href="@Url.Action("Product", "Home", new { culture = currentCulture, productId = product.Id })">
                             <div class="portfolio-box">
-                                <img src="@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
+                                <img src="@product.SmallImage" alt="@product.Name" class="img-responsive">
                                 <div class="portfolio-box-caption">
                                     <div class="portfolio-box-caption-content">
                                         <h1>@product.Name</h1>
@@ -117,9 +119,9 @@
                 else
                 {
                     <div class="col-md-4 col-xs-6">
-                        <a href="@Url.Action("Product", "Home", new { productId = product.Id })">
+                        <a href="@Url.Action("Product", "Home", new { culture = currentCulture, productId = product.Id })">
                             <div class="portfolio-box">
-                                <img src="@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
+                                <img src="@product.SmallImage" alt="@product.Name" class="img-responsive">
                                 <div class="portfolio-box-caption">
                                     <div class="portfolio-box-caption-content">
                                         <h1>@product.Name</h1>
