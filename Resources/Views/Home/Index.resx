@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Обвес из нержавейки в Харькове - кенгурятники, пороги, дуги пикапов, бампера</value>
+  </data>
+  <data name="HeroTitle" xml:space="preserve">
+    <value>Обвес из нержавейки в Харькове</value>
+  </data>
+  <data name="HeroSubtitle" xml:space="preserve">
+    <value>Профессиональное изготовление и установка обвесов для автомобилей</value>
+  </data>
+  <data name="ViewWorks" xml:space="preserve">
+    <value>Смотреть работы</value>
+  </data>
+  <data name="AboutTitle" xml:space="preserve">
+    <value>О нас</value>
+  </data>
+  <data name="AboutText" xml:space="preserve">
+    <value>Мы специализируемся на изготовлении и установке обвесов из нержавеющей стали для различных моделей автомобилей. Наша команда имеет многолетний опыт в этой области и гарантирует высокое качество работ.</value>
+  </data>
+  <data name="ServicesTitle" xml:space="preserve">
+    <value>Наши услуги</value>
+  </data>
+  <data name="Service1Title" xml:space="preserve">
+    <value>Передние защиты</value>
+  </data>
+  <data name="Service1Description" xml:space="preserve">
+    <value>Изготовление и установка передних защит (кенгурятников) для внедорожников и пикапов</value>
+  </data>
+  <data name="Service2Title" xml:space="preserve">
+    <value>Задние защиты</value>
+  </data>
+  <data name="Service2Description" xml:space="preserve">
+    <value>Производство и монтаж задних защит для различных моделей автомобилей</value>
+  </data>
+  <data name="Service3Title" xml:space="preserve">
+    <value>Пороги</value>
+  </data>
+  <data name="Service3Description" xml:space="preserve">
+    <value>Изготовление и установка порогов из нержавеющей стали</value>
+  </data>
+  <data name="Service4Title" xml:space="preserve">
+    <value>Дуги пикапов</value>
+  </data>
+  <data name="Service4Description" xml:space="preserve">
+    <value>Производство и монтаж дуг для пикапов</value>
+  </data>
+  <data name="LatestWorksTitle" xml:space="preserve">
+    <value>Последние работы</value>
+  </data>
+  <data name="ViewAllWorks" xml:space="preserve">
+    <value>Смотреть все работы</value>
+  </data>
+  <data name="ContactUsTitle" xml:space="preserve">
+    <value>Свяжитесь с нами</value>
+  </data>
+  <data name="ContactUsText" xml:space="preserve">
+    <value>Заинтересованы в наших услугах? Свяжитесь с нами для получения дополнительной информации или заказа.</value>
+  </data>
+  <data name="ContactUsButton" xml:space="preserve">
+    <value>Связаться</value>
+  </data>
+</root> 
