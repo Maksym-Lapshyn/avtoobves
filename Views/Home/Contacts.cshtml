@@ -1,5 +1,7 @@
-﻿@{
-    ViewBag.Title = "Обвес из нержавейки в Харькове - Контакты - кенгурятники, пороги, дуги пикапов, бампера";
+﻿@inject IViewLocalizer Localizer
+
+@{
+    ViewBag.Title = Localizer["PageTitle"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -7,24 +9,24 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-sm-12 text-center wow fadeInLeft delay-01s">
-                <h1>Посмотреть примеры работ, подобрать материал, а также заказать обвес и прочие изделия из нержавеющей стали Вы можете по адресу:</h1>
+                <h1>@Localizer["AddressTitle"]</h1>
                 <hr class="hr-center"/>
                 <span class="address-icon glyphicon glyphicon-globe"></span><br/>
                 <p>
-                    Харьков, Украина<br/>
-                    Октябрьский Район<br/>
-                    Станция метро "Холодная гора"<br/>
-                    Улица Григоровская 66/2<br/>
-                    <strong>Доставка по всей Украине!</strong>
+                    @Localizer["AddressLine1"]<br/>
+                    @Localizer["AddressLine2"]<br/>
+                    @Localizer["AddressLine3"]<br/>
+                    @Localizer["AddressLine4"]<br/>
+                    <strong>@Localizer["DeliveryNote"]</strong>
                 </p>
             </div>
             <div class="col-lg-6 col-sm-12 text-center wow fadeInRight delay-01s">
-                <h1>Получить консультацию, договориться о встрече, выслать размеры и обменяться информацией Вы можете по телефону, или электронной почте:</h1>
+                <h1>@Localizer["ContactTitle"]</h1>
                 <hr class="hr-center"/>
                 <span class="address-icon glyphicon glyphicon-earphone"></span><br/>
-                <p><a href="tel:097-461-50-35">097-461-50-35 (Киевстар)</a></p>
+                <p><a href="tel:097-461-50-35">@Localizer["PhoneNumber"]</a></p>
                 <span class="address-icon glyphicon glyphicon-envelope"></span><br/>
-                <p><a href="mailto:info@avtoobves.com.ua">info@avtoobves.com.ua</a></p>
+                <p><a href="mailto:info@avtoobves.com.ua">@Localizer["Email"]</a></p>
             </div>
         </div>
         <div id="map" style="height:400px; width:100%;">

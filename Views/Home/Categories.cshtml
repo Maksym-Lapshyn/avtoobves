@@ -1,5 +1,7 @@
-﻿@{
-    ViewBag.Title = "Обвес из нержавейки в Харькове - Категории - кенгурятники, пороги, дуги пикапов, бампера";
+﻿@inject IViewLocalizer Localizer
+
+@{
+    ViewBag.Title = Localizer["PageTitle"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,10 +11,10 @@
             <div class="col-sm-6 wow fadeInLeft delay-05s">
                 <a href="@Url.Action("Category", "Home", new { categoryName = "Front" })">
                     <div class="portfolio-box">
-                        <img src="https://d1ucqhcti31ovy.cloudfront.net/general/front.JPG" alt="Передние защиты" name="Передние защиты" class="img-responsive">
+                        <img src="https://d1ucqhcti31ovy.cloudfront.net/general/front.JPG" alt="@Localizer["CategoryFront"]" name="@Localizer["CategoryFront"]" class="img-responsive">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
-                                <h1>Передние защиты</h1>
+                                <h1>@Localizer["CategoryFront"]</h1>
                             </div>
                         </div>
                     </div>
@@ -21,10 +23,10 @@
             <div class="col-sm-6 wow fadeInRight delay-05s">
                 <a href="@Url.Action("Category", "Home", new { categoryName = "Rear" })">
                     <div class="portfolio-box">
-                        <img src="https://d1ucqhcti31ovy.cloudfront.net/general/rear.jpg" alt="Задние защиты" name="Задние защиты" class="img-responsive">
+                        <img src="https://d1ucqhcti31ovy.cloudfront.net/general/rear.jpg" alt="@Localizer["CategoryRear"]" name="@Localizer["CategoryRear"]" class="img-responsive">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
-                                <h1>Задние защиты</h1>
+                                <h1>@Localizer["CategoryRear"]</h1>
                             </div>
                         </div>
                     </div>
@@ -33,10 +35,10 @@
             <div class="col-sm-6 wow fadeInLeft delay-05s">
                 <a href="@Url.Action("Category", "Home", new { categoryName = "Footer" })">
                     <div class="portfolio-box">
-                        <img src="https://d1ucqhcti31ovy.cloudfront.net/general/footer.jpg" alt="Пороги" name="Пороги" class="img-responsive">
+                        <img src="https://d1ucqhcti31ovy.cloudfront.net/general/footer.jpg" alt="@Localizer["CategoryFooter"]" name="@Localizer["CategoryFooter"]" class="img-responsive">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
-                                <h1>Пороги</h1>
+                                <h1>@Localizer["CategoryFooter"]</h1>
                             </div>
                         </div>
                     </div>
@@ -45,10 +47,10 @@
             <div class="col-sm-6 wow fadeInRight delay-05s">
                 <a href="@Url.Action("Category", "Home", new { categoryName = "Other" })">
                     <div class="portfolio-box">
-                        <img src="https://d1ucqhcti31ovy.cloudfront.net/general/other.jpg" alt="Прочее" name="Прочее" class="img-responsive">
+                        <img src="https://d1ucqhcti31ovy.cloudfront.net/general/other.jpg" alt="@Localizer["CategoryOther"]" name="@Localizer["CategoryOther"]" class="img-responsive">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
-                                <h1>Прочее</h1>
+                                <h1>@Localizer["CategoryOther"]</h1>
                             </div>
                         </div>
                     </div>

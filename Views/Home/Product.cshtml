@@ -1,15 +1,16 @@
-﻿@model Product
+﻿@inject IViewLocalizer Localizer
+@model Product
 
 @{
-    ViewBag.Title = $"Обвес из нержавейки в Харькове - {Model.Name}";
+    ViewBag.Title = string.Format(Localizer["PageTitle"].Value, Model.Name);
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     var categoryName = Model.Category.ToString() switch
     {
-        "Front" => "Передние защиты",
-        "Rear" => "Задние защиты",
-        "Footer" => "Пороги",
-        _ => "Прочее"
+        "Front" => Localizer["CategoryFront"].Value,
+        "Rear" => Localizer["CategoryRear"].Value,
+        "Footer" => Localizer["CategoryFooter"].Value,
+        _ => Localizer["CategoryOther"].Value
     };
 }
 
@@ -28,11 +29,11 @@
                 <h1>@Model.Name</h1>
                 <hr class="visible-md visible-lg"/>
                 <hr class="hr-center visible-sm visible-xs"/>
-                <h3>Категория - @Html.ActionLink(categoryName, "Category", "Home", new { categoryName = Model.Category.ToString() }, new { @class = "anchor-standard" })</h3>
+                <h3>@Localizer["Category"] - @Html.ActionLink(categoryName, "Category", "Home", new { categoryName = Model.Category.ToString() }, new { @class = "anchor-standard" })</h3>
                 <p>@Model.Description</p>
             </div>
         </div>
-        <h3 class="text-center">Похожие работы:</h3>
+        <h3 class="text-center">@Localizer["SimilarWorks"]</h3>
         <hr class="hr-center"/>
         @await Component.InvokeAsync("SimilarProducts", new { productId = Model.Id })
     </div>

@@ -1,3 +1,4 @@
+@inject IViewLocalizer Localizer
 @using Microsoft.AspNetCore.Html
 @model BlogPost
 
@@ -11,12 +12,12 @@
         <div class="panel-heading">
             @if (ViewBag.New == true && Html.ValidationSummary() != HtmlString.Empty)
             {
-                <h1>Добавление нового поста</h1>
+                <h1>@Localizer["AddNewPost"]</h1>
                 ViewBag.New = false;
             }
             else
             {
-                <h1>Изменение поста "@Model.Title"</h1>
+                <h1>@string.Format(Localizer["EditPost"].Value, Model.Title)</h1>
             }
         </div>
         @using (Html.BeginForm("EditBlogPost", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -29,16 +30,16 @@
                 @Html.HiddenFor(bp => bp.CreatedAt)
                 @Html.HiddenFor(bp => bp.CreatedBy)
 
-                <p>@Html.LabelFor(bp => bp.Title)</p>
+                <p>@Html.LabelFor(bp => bp.Title, Localizer["Title"].Value)</p>
                 @Html.TextBoxFor(bp => bp.Title, new { @class = "form-control" })
 
-                <p>@Html.LabelFor(bp => bp.Description)</p>
+                <p>@Html.LabelFor(bp => bp.Description, Localizer["Description"].Value)</p>
                 @Html.TextAreaFor(bp => bp.Description, new { @class = "form-control", rows = 5 })
 
-                <p>@Html.LabelFor(bp => bp.FirstParagraphText)</p>
+                <p>@Html.LabelFor(bp => bp.FirstParagraphText, Localizer["FirstParagraph"].Value)</p>
                 @Html.TextAreaFor(bp => bp.FirstParagraphText, new { @class = "form-control", rows = 20 })
 
-                <p>@Html.LabelFor(p => p.FirstImageUrl)</p>
+                <p>@Html.LabelFor(p => p.FirstImageUrl, Localizer["FirstImage"].Value)</p>
                 <p>
                     @if (Model.FirstImageUrl == null)
                     {
@@ -51,10 +52,10 @@
                     }
                 </p>
 
-                <p>@Html.LabelFor(bp => bp.SecondParagraphText)</p>
+                <p>@Html.LabelFor(bp => bp.SecondParagraphText, Localizer["SecondParagraph"].Value)</p>
                 @Html.TextAreaFor(bp => bp.SecondParagraphText, new { @class = "form-control", rows = 20 })
 
-                <p>@Html.LabelFor(p => p.SecondImageUrl)</p>
+                <p>@Html.LabelFor(p => p.SecondImageUrl, Localizer["SecondImage"].Value)</p>
                 <p>
                     @if (Model.SecondImageUrl == null)
                     {
@@ -67,12 +68,12 @@
                     }
                 </p>
 
-                <p>@Html.LabelFor(bp => bp.ThirdParagraphText)</p>
+                <p>@Html.LabelFor(bp => bp.ThirdParagraphText, Localizer["ThirdParagraph"].Value)</p>
                 @Html.TextAreaFor(bp => bp.ThirdParagraphText, new { @class = "form-control", rows = 20 })
             </div>
             <div class="panel-footer">
-                <input type="submit" value="Сохранить" class="btn btn-primary"/>
-                @Html.ActionLink("Закрыть и вернуться к постам", "BlogPosts", "Admin", new { @class = "btn btn-default" })
+                <input type="submit" value="@Localizer["Save"]" class="btn btn-primary"/>
+                @Html.ActionLink(Localizer["CloseAndReturn"].Value, "BlogPosts", "Admin", new { @class = "btn btn-default" })
             </div>
         }
     </div>

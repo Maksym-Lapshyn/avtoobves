@@ -1,7 +1,8 @@
+@inject IViewLocalizer Localizer
 @model List<BlogPost>
 
 @{
-    ViewBag.Title = "Обвес из нержавейки в Харькове - Блог - кенгурятники, пороги, дуги пикапов, бампера";
+    ViewBag.Title = Localizer["PageTitle"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 

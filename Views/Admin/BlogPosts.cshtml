@@ -1,7 +1,8 @@
+@inject IViewLocalizer Localizer
 @model List<BlogPost>
 
 @{
-    ViewBag.Title = "Все посты";
+    ViewBag.Title = Localizer["PageTitle"];
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -9,18 +10,18 @@
 <div class="container-fluid">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h1>Все посты</h1>
-            <p>Всего постов - @Model.Count()</p>
-            <p>@Html.ActionLink("Добавить пост", "CreateBlogPost", "Admin", new { @class = "btn btn-success" })</p>
+            <h1>@Localizer["PageTitle"]</h1>
+            <p>@string.Format(Localizer["TotalPosts"].Value, Model.Count())</p>
+            <p>@Html.ActionLink(Localizer["AddPost"].Value, "CreateBlogPost", "Admin", new { @class = "btn btn-success" })</p>
         </div>
         <div class="panel-body">
             <table class="table table-striped table-bordered">
                 <tr>
-                    <th style="width:15%;">Id</th>
-                    <th style="width:20%;">Название</th>
-                    <th style="width:25%;">Первое фото</th>
-                    <th style="width:25%;">Второе фото</th>
-                    <th style="width:15%;">Действия</th>
+                    <th style="width:15%;">@Localizer["Id"]</th>
+                    <th style="width:20%;">@Localizer["Title"]</th>
+                    <th style="width:25%;">@Localizer["FirstImage"]</th>
+                    <th style="width:25%;">@Localizer["SecondImage"]</th>
+                    <th style="width:15%;">@Localizer["Actions"]</th>
                 </tr>
                 @foreach (var blogPost in Model)
                 {
@@ -30,7 +31,7 @@
                         <td>
                             @if (blogPost.FirstImageUrl == null)
                             {
-                                <p>Фото еще не добавлено</p>
+                                <p>@Localizer["NoImageAdded"]</p>
                             }
                             else
                             {
@@ -40,7 +41,7 @@
                         <td>
                             @if (blogPost.SecondImageUrl == null)
                             {
-                                <p>Фото еще не добавлено</p>
+                                <p>@Localizer["NoImageAdded"]</p>
                             }
                             else
                             {
@@ -48,11 +49,11 @@
                             }
                         </td>
                         <td>
-                            @Html.ActionLink("Изменить", "EditBlogPost", new { id = blogPost.Id }, new { @class = "btn btn-success" })
+                            @Html.ActionLink(Localizer["Edit"].Value, "EditBlogPost", new { id = blogPost.Id }, new { @class = "btn btn-success" })
                             @using (Html.BeginForm("DeleteBlogPost", "Admin", FormMethod.Post))
                             {
                                 @Html.Hidden("id", blogPost.Id)
-                                <input type="submit" class="btn btn-danger" value="Удалить"/>
+                                <input type="submit" class="btn btn-danger" value="@Localizer["Delete"]"/>
                             }
                         </td>
                     </tr>

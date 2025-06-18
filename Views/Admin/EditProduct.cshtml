@@ -1,4 +1,5 @@
-﻿@using Microsoft.AspNetCore.Html
+﻿@inject IViewLocalizer Localizer
+@using Microsoft.AspNetCore.Html
 @model Product
 
 @{
@@ -11,12 +12,12 @@
         <div class="panel-heading">
             @if (ViewBag.New == true && Html.ValidationSummary() != HtmlString.Empty)
             {
-                <h1>Добавление новой работы</h1>
+                <h1>@Localizer["AddNewWork"]</h1>
                 ViewBag.New = false;
             }
             else
             {
-                <h1>Изменение товара "@Model.Name"</h1>
+                <h1>@string.Format(Localizer["EditWork"].Value, Model.Name)</h1>
             }
         </div>
         @using (Html.BeginForm("EditProduct", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -26,16 +27,16 @@
                 @Html.HiddenFor(p => p.Id)
                 @Html.HiddenFor(p => p.SmallImage)
                 @Html.HiddenFor(p => p.BigImage)
-                <p>@Html.LabelFor(p => p.Name)</p>
+                <p>@Html.LabelFor(p => p.Name, Localizer["Name"].Value)</p>
                 @Html.TextBoxFor(p => p.Name, new { @class = "form-control" })
 
-                <p>@Html.LabelFor(p => p.Description)</p>
+                <p>@Html.LabelFor(p => p.Description, Localizer["Description"].Value)</p>
                 @Html.TextAreaFor(p => p.Description, new { @class = "form-control", rows = 5 })
 
-                <p>@Html.LabelFor(p => p.Category)</p>
+                <p>@Html.LabelFor(p => p.Category, Localizer["Category"].Value)</p>
                 @Html.DropDownListFor(p => p.Category, new SelectList(Enum.GetNames(Model.Category.GetType()), Model.Category.ToString()))
 
-                <p>@Html.LabelFor(p => p.BigImage)</p>
+                <p>@Html.LabelFor(p => p.BigImage, Localizer["BigImage"].Value)</p>
                 <p>
                     @if (Model.BigImage == null)
                     {
@@ -49,8 +50,8 @@
                 </p>
             </div>
             <div class="panel-footer">
-                <input type="submit" value="Сохранить" class="btn btn-primary"/>
-                @Html.ActionLink("Закрыть и вернуться к списку работ", "Products", "Admin", new { @class = "btn btn-default" })
+                <input type="submit" value="@Localizer["Save"]" class="btn btn-primary"/>
+                @Html.ActionLink(Localizer["CloseAndReturn"].Value, "Products", "Admin", new { @class = "btn btn-default" })
             </div>
         }
     </div>

@@ -1,16 +1,17 @@
-﻿@{
-    ViewBag.Title = "Админская панель";
+﻿@inject IViewLocalizer Localizer
+@{
+    ViewBag.Title = Localizer["PageTitle"];
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <div class="container-fluid">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h1>Секции</h1>
+            <h1>@Localizer["Sections"]</h1>
         </div>
         <div class="panel-body">
-            <p>@Html.ActionLink("Работы", "Products", "Admin", new { @class = "btn btn-success" })</p>
-            <p>@Html.ActionLink("Блог", "BlogPosts", "Admin", new { @class = "btn btn-success" })</p>
+            <p>@Html.ActionLink(Localizer["Works"].Value, "Products", "Admin", new { @class = "btn btn-success" })</p>
+            <p>@Html.ActionLink(Localizer["Blog"].Value, "BlogPosts", "Admin", new { @class = "btn btn-success" })</p>
         </div>
     </div>
 </div>

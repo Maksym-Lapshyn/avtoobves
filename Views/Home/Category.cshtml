@@ -1,15 +1,16 @@
-﻿@model List<Product>
+﻿@inject IViewLocalizer Localizer
+@model List<Product>
 
 @{
     var categoryName = Model.First().Category.ToString() switch
     {
-        "Front" => "Передние защиты",
-        "Rear" => "Задние защиты",
-        "Footer" => "Пороги",
-        _ => "Прочее"
+        "Front" => Localizer["CategoryFront"].Value,
+        "Rear" => Localizer["CategoryRear"].Value,
+        "Footer" => Localizer["CategoryFooter"].Value,
+        _ => Localizer["CategoryOther"].Value
     };
 
-    ViewBag.Title = $"Обвес из нержавейки в Харькове - {categoryName}";
+    ViewBag.Title = string.Format(Localizer["PageTitle"].Value, categoryName);
     Layout = "~/Views/Shared/_Layout.cshtml";
     var count = 0;
 }
