@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Avtoobves.Controllers
 {
     [Authorize]
-    public class AdminController : Controller
+    public class AdminController : BaseController
     {
         private readonly IProductRepository _productRepository;
         private readonly IBlogPostRepository _blogPostRepository;

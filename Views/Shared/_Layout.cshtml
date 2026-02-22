@@ -1,11 +1,27 @@
-﻿<!DOCTYPE html>
-<html>
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    var currentCulture = System.Globalization.CultureInfo.CurrentUICulture.Name;
+    var culturePath = currentCulture.StartsWith("uk") ? "uk" : "ru";
+    var controllerName = ViewContext.RouteData.Values["controller"]?.ToString();
+    var actionName = ViewContext.RouteData.Values["action"]?.ToString();
+    var id = ViewContext.RouteData.Values["id"];
+}
+<!DOCTYPE html>
+<html lang="@currentCulture">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@ViewBag.Title</title>
-    <meta name="description" content="Кенгурятники, окантовки, задние защиты, пороги, дуги пикапов, и прочие изделия из высококачественной нержавеющей стали под заказ в Харькове. Доставка по всей Украине.">
-    <meta name="keywords" content="обвес, кенгурятник, пороги, нержавейка, защита бампера, обвес Харьков, кузовные дуги">
+    <meta http-equiv="content-language" content="@currentCulture">
+    <meta name="description" content="@(currentCulture.StartsWith("uk") ? "Кенгурятники, окантування, задні захисти, пороги, дуги пікапів, та інші вироби з високоякісної нержавіючої сталі під замовлення у Харкові. Доставка по всій Україні." : "Кенгурятники, окантовки, задние защиты, пороги, дуги пикапов, и прочие изделия из высококачественной нержавеющей стали под заказ в Харькове. Доставка по всей Украине.")">
+    <meta name="keywords" content="@(currentCulture.StartsWith("uk") ? "обвіс, кенгурятник, пороги, нержавійка, захист бампера, обвіс Харків, кузовні дуги" : "обвес, кенгурятник, пороги, нержавейка, защита бампера, обвес Харьков, кузовные дуги")">
+    
+    @* Hreflang tags for SEO *@
+    <link rel="alternate" hreflang="ru-UA" href="@Url.Action(actionName, controllerName, new { culture = "ru", id = id }, Context.Request.Scheme)" />
+    <link rel="alternate" hreflang="uk-UA" href="@Url.Action(actionName, controllerName, new { culture = "uk", id = id }, Context.Request.Scheme)" />
+    <link rel="alternate" hreflang="x-default" href="@Url.Action(actionName, controllerName, new { culture = "ru", id = id }, Context.Request.Scheme)" />
+    
     <link rel="icon" href="~/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="~/css/site.css"/>
     <link rel="stylesheet" href="~/css/animate.css"/>
@@ -45,10 +61,15 @@
                 <div class="collapse navbar-collapse navbar-right" id="mynavbar">
                     <ul class="nav navbar-nav">
                         <li><a href="tel:097-461-50-35">097-461-50-35</a></li>
-                        <li>@Html.ActionLink("Главная", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Наши работы", "Categories", "Home")</li>
-                        <li>@Html.ActionLink("Контакты", "Contacts", "Home")</li>
-                        <li>@Html.ActionLink("Блог", "Blog", "Home")</li>
+                        <li>@Html.ActionLink(Localizer["Home"].Value, "Index", "Home", new { culture = culturePath }, null)</li>
+                        <li>@Html.ActionLink(Localizer["OurWorks"].Value, "Categories", "Home", new { culture = culturePath }, null)</li>
+                        <li>@Html.ActionLink(Localizer["Contacts"].Value, "Contacts", "Home", new { culture = culturePath }, null)</li>
+                        <li>@Html.ActionLink(Localizer["Blog"].Value, "Blog", "Home", new { culture = culturePath }, null)</li>
+                        <li class="language-switcher">
+                            <a href="@Url.Action(actionName, controllerName, new { culture = "ru", id = id })" hreflang="ru-UA" class="@(culturePath == "ru" ? "active" : "")">РУ</a>
+                            <span>|</span>
+                            <a href="@Url.Action(actionName, controllerName, new { culture = "uk", id = id })" hreflang="uk-UA" class="@(culturePath == "uk" ? "active" : "")">УКР</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -67,12 +88,12 @@
                 <p>Icons made by Freepik from <a class="anchor-reverse" href="http://www.flaticon.com/">www.flaticon.com</a></p>
             </div>
             <div class="col-xs-12 col-sm-3 contacts-wrapper">
-                <p><span class="glyphicon glyphicon-flag"></span> Адрес:</p>
-                <p>Харьков, Украина</p>
-                <p>Улица Григоровская 66/2</p>
+                <p><span class="glyphicon glyphicon-flag"></span> @Localizer["Address"]</p>
+                <p>@Localizer["City"]</p>
+                <p>@Localizer["Street"]</p>
             </div>
             <div class="col-xs-12 col-sm-3 contacts-wrapper">
-                <p><span class="address-icon glyphicon glyphicon-phone-alt"></span> Контакты:</p>
+                <p><span class="address-icon glyphicon glyphicon-phone-alt"></span> @Localizer["Contacts"]</p>
                 <p><a href="tel:097-461-50-35">097-461-50-35 (Киевстар)</a></p>
                 <p><a href="mailto:info@avtoobves.com.ua">info@avtoobves.com.ua</a></p>
             </div>

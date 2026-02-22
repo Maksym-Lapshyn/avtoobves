@@ -48,6 +48,34 @@ hr {
     background-image: -o-linear-gradient(left, rgba(170, 174, 127, 1), rgba(170, 174, 127, 0.5), rgba(0, 0, 0, 0));
 }
 
+/* Language Switcher Styles */
+.language-switcher {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.language-switcher a {
+    color: #777;
+    font-weight: normal;
+    text-decoration: none;
+    padding: 5px 8px;
+    transition: all 0.3s ease;
+}
+
+.language-switcher a:hover {
+    color: #AAAE7F;
+}
+
+.language-switcher a.active {
+    color: #AAAE7F;
+    font-weight: bold;
+}
+
+.language-switcher span {
+    color: #777;
+}
+
 .hr-center {
     border: 0;
     height: 2px;

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Avtoobves.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly IProductRepository _productRepository;
         private readonly IBlogPostRepository _blogPostRepository;
