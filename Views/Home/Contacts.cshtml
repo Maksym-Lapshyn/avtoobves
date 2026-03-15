@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Обвес из нержавейки в Харькове - Контакты - кенгурятники, пороги, дуги пикапов, бампера";
+    ViewBag.Title = L["PageTitle_Contacts"].Value;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -7,19 +7,19 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-sm-12 text-center wow fadeInLeft delay-01s">
-                <h1>Посмотреть примеры работ, подобрать материал, а также заказать обвес и прочие изделия из нержавеющей стали Вы можете по адресу:</h1>
+                <h1>@L["Contacts_AddressHeading"]</h1>
                 <hr class="hr-center"/>
                 <span class="address-icon glyphicon glyphicon-globe"></span><br/>
                 <p>
-                    Харьков, Украина<br/>
-                    Октябрьский Район<br/>
-                    Станция метро "Холодная гора"<br/>
-                    Улица Григоровская 66/2<br/>
-                    <strong>Доставка по всей Украине!</strong>
+                    @L["Contacts_City"]<br/>
+                    @L["Contacts_District"]<br/>
+                    @L["Contacts_Metro"]<br/>
+                    @L["Contacts_Street"]<br/>
+                    <strong>@L["Contacts_Delivery"]</strong>
                 </p>
             </div>
             <div class="col-lg-6 col-sm-12 text-center wow fadeInRight delay-01s">
-                <h1>Получить консультацию, договориться о встрече, выслать размеры и обменяться информацией Вы можете по телефону, или электронной почте:</h1>
+                <h1>@L["Contacts_CommunicationHeading"]</h1>
                 <hr class="hr-center"/>
                 <span class="address-icon glyphicon glyphicon-earphone"></span><br/>
                 <p><a href="tel:097-461-50-35">097-461-50-35 (Киевстар)</a></p>

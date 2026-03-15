@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+
+  <!-- Navigation -->
+  <data name="Nav_Home" xml:space="preserve">
+    <value>Главная</value>
+  </data>
+  <data name="Nav_Works" xml:space="preserve">
+    <value>Наши работы</value>
+  </data>
+  <data name="Nav_Contacts" xml:space="preserve">
+    <value>Контакты</value>
+  </data>
+  <data name="Nav_Blog" xml:space="preserve">
+    <value>Блог</value>
+  </data>
+
+  <!-- Footer -->
+  <data name="Footer_Rights" xml:space="preserve">
+    <value>Все права защищены</value>
+  </data>
+  <data name="Footer_AddressLabel" xml:space="preserve">
+    <value>Адрес:</value>
+  </data>
+  <data name="Footer_City" xml:space="preserve">
+    <value>Харьков, Украина</value>
+  </data>
+  <data name="Footer_Street" xml:space="preserve">
+    <value>Улица Григоровская 66/2</value>
+  </data>
+  <data name="Footer_ContactsLabel" xml:space="preserve">
+    <value>Контакты:</value>
+  </data>
+
+  <!-- Meta -->
+  <data name="Meta_Description" xml:space="preserve">
+    <value>Кенгурятники, окантовки, задние защиты, пороги, дуги пикапов, и прочие изделия из высококачественной нержавеющей стали под заказ в Харькове. Доставка по всей Украине.</value>
+  </data>
+
+  <!-- Page Titles -->
+  <data name="PageTitle_Home" xml:space="preserve">
+    <value>Обвес из нержавейки в Харькове - кенгурятники, пороги, дуги пикапов и ремонт изделий из нержавеющей стали под заказ</value>
+  </data>
+  <data name="PageTitle_Contacts" xml:space="preserve">
+    <value>Обвес из нержавейки в Харькове - Контакты - кенгурятники, пороги, дуги пикапов, бампера</value>
+  </data>
+  <data name="PageTitle_Categories" xml:space="preserve">
+    <value>Обвес из нержавейки в Харькове - Категории - кенгурятники, пороги, дуги пикапов, бампера</value>
+  </data>
+  <data name="PageTitle_Blog" xml:space="preserve">
+    <value>Обвес из нержавейки в Харькове - Блог - кенгурятники, пороги, дуги пикапов, бампера</value>
+  </data>
+  <data name="PageTitle_Product" xml:space="preserve">
+    <value>Обвес из нержавейки в Харькове - {0}</value>
+  </data>
+  <data name="PageTitle_BlogPost" xml:space="preserve">
+    <value>Обвес из нержавейки в Харькове - {0}</value>
+  </data>
+
+  <!-- Index Page - Hero -->
+  <data name="Index_BrandTitle" xml:space="preserve">
+    <value>Авто Обвес</value>
+  </data>
+  <data name="Index_Subtitle" xml:space="preserve">
+    <value>Изготовление и ремонт первоклассного обвеса, а также прочих изделий из нержавеющей стали под заказ</value>
+  </data>
+
+  <!-- Index Page - About -->
+  <data name="Index_StainlessTitle" xml:space="preserve">
+    <value>Обвес из нержавейки</value>
+  </data>
+  <data name="Index_StainlessTitleSm" xml:space="preserve">
+    <value>Силовой обвес из нержавейки</value>
+  </data>
+  <data name="Index_WhatIsIt" xml:space="preserve">
+    <value>Что это такое?</value>
+  </data>
+  <data name="Index_Para1" xml:space="preserve">
+    <value>Такое изделие как кенгурятник, окантовка из нержавейки, пороги, защита дуг для пикапов и силовой бампер типа АРБ – это то, что придаст Вашему автомобилю изящества, а также обезопасит сам процесс вождения.</value>
+  </data>
+  <data name="Index_Para2" xml:space="preserve">
+    <value>Кенгурятник (передняя защита) – конструкция из нержавеющей стали, которую устанавливают спереди автомобиля, чтобы защитить передний бампер и капот от прямых повреждений при прохождении пересеченной местности, а также при вождении внутри города.</value>
+  </data>
+  <data name="Index_Para3" xml:space="preserve">
+    <value>Окантовки из нержавеющей стали (задние защиты) – сооружение из нержавеющих труб, которое крепится с задней стороны кузова и защищает его целостность. Лучшая защита при парковке и заезде в гараж.</value>
+  </data>
+  <data name="Index_Para4" xml:space="preserve">
+    <value>Пороги и подпорожники из нержавейки – это трубы и ступени, которые защищают от боковых повреждений кузова и упрощают доступ как внутрь салона, так и к крыше Вашего автомобиля.</value>
+  </data>
+  <data name="Index_Para5" xml:space="preserve">
+    <value>В наших руках, благодаря технологиям и опыту, любое изделие из нержавеющей стали превращается в настоящее произведение искусства, владельцем которого становитесь именно Вы.</value>
+  </data>
+
+  <!-- Index Page - Catalog -->
+  <data name="Index_CatalogTitle" xml:space="preserve">
+    <value>Каталог работ</value>
+  </data>
+  <data name="Index_CatalogDesc" xml:space="preserve">
+    <value>Ознакомиться с примерами работ Вы можете в нашем портфолио. В нем Вы найдете кенгурятники, окантовки, задние защиты, пороги, дуги пикапов, и прочие изделия из высококачественной нержавеющей стали</value>
+  </data>
+  <data name="Index_GoToCatalog" xml:space="preserve">
+    <value>Перейти к каталогу работ</value>
+  </data>
+
+  <!-- Index Page - Benefits -->
+  <data name="Index_Design" xml:space="preserve">
+    <value>Дизайн</value>
+  </data>
+  <data name="Index_DesignDesc" xml:space="preserve">
+    <value>Эксклюзивный дизайн – это то, что подчеркивает Вашу индивидуальность и выделяет Ваше авто из общей массы. Уникальность наших изделий заключается в том, что мы делаем не то, что удобно нам, а то, чего хотите Вы сами. Вы можете создать дизайн вместе с нами, либо же подобрать его самостоятельно</value>
+  </data>
+  <data name="Index_Material" xml:space="preserve">
+    <value>Материал</value>
+  </data>
+  <data name="Index_MaterialDesc" xml:space="preserve">
+    <value>В изделиях из нержавеющей стали важную роль играет качество сырья, влияющее как на их внешний вид, так и на износоустойчивость. Поэтому, работая с хорошим, сертифицированным материалом, не подвергающимся коррозии (пищевая нержавейка), мы гарантируем высокое качество и долговечность наших изделий</value>
+  </data>
+  <data name="Index_Setup" xml:space="preserve">
+    <value>Установка</value>
+  </data>
+  <data name="Index_SetupDesc" xml:space="preserve">
+    <value>После покупки обвеса из нержавеющей стали, на плечи покупателя ложится задача по его установке. Однако, без надлежащих знаний, оборудования и опыта, эта задача может оказаться не из простых. Работая с нами, Вам не нужно заботиться о монтаже обвеса на Ваш автомобиль будь то наше изделие, или же работа, сделанная иным производителем</value>
+  </data>
+  <data name="Index_Repair" xml:space="preserve">
+    <value>Ремонт</value>
+  </data>
+  <data name="Index_RepairDesc" xml:space="preserve">
+    <value>В случае деформации обвеса, не спешите выбрасывать его на металлолом. Почти всегда, обладая необходимыми технологиями и навыками, его можно восстановить. Мы готовы прийти к Вам на помощь в любое время, сэкономив Ваши деньги и время</value>
+  </data>
+
+  <!-- Categories -->
+  <data name="Cat_Front" xml:space="preserve">
+    <value>Передние защиты</value>
+  </data>
+  <data name="Cat_Rear" xml:space="preserve">
+    <value>Задние защиты</value>
+  </data>
+  <data name="Cat_Footer" xml:space="preserve">
+    <value>Пороги</value>
+  </data>
+  <data name="Cat_Other" xml:space="preserve">
+    <value>Прочее</value>
+  </data>
+
+  <!-- Product Page -->
+  <data name="Product_Category" xml:space="preserve">
+    <value>Категория</value>
+  </data>
+  <data name="Product_SimilarWorks" xml:space="preserve">
+    <value>Похожие работы:</value>
+  </data>
+
+  <!-- Contacts Page -->
+  <data name="Contacts_AddressHeading" xml:space="preserve">
+    <value>Посмотреть примеры работ, подобрать материал, а также заказать обвес и прочие изделия из нержавеющей стали Вы можете по адресу:</value>
+  </data>
+  <data name="Contacts_CommunicationHeading" xml:space="preserve">
+    <value>Получить консультацию, договориться о встрече, выслать размеры и обменяться информацией Вы можете по телефону, или электронной почте:</value>
+  </data>
+  <data name="Contacts_City" xml:space="preserve">
+    <value>Харьков, Украина</value>
+  </data>
+  <data name="Contacts_District" xml:space="preserve">
+    <value>Октябрьский Район</value>
+  </data>
+  <data name="Contacts_Metro" xml:space="preserve">
+    <value>Станция метро "Холодная гора"</value>
+  </data>
+  <data name="Contacts_Street" xml:space="preserve">
+    <value>Улица Григоровская 66/2</value>
+  </data>
+  <data name="Contacts_Delivery" xml:space="preserve">
+    <value>Доставка по всей Украине!</value>
+  </data>
+
+</root>

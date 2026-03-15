@@ -2,6 +2,27 @@
     height: 100%;
 }
 
+.lang-picker {
+    display: flex !important;
+    align-items: center;
+    padding: 0 8px;
+}
+
+.lang-picker a {
+    display: inline !important;
+    padding: 0 3px;
+    color: #777;
+}
+
+.lang-picker a:hover {
+    color: #333;
+    text-decoration: none;
+}
+
+.lang-picker .separator {
+    color: #777;
+}
+
 body {
     display: flex;
     min-height: 100%;

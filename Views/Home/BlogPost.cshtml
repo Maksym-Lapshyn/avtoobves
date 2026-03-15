@@ -1,7 +1,7 @@
 @model BlogPost
 
 @{
-    ViewBag.Title = $"Обвес из нержавейки в Харькове - {Model.Title}";
+    ViewBag.Title = string.Format(L["PageTitle_BlogPost"].Value, Model.Title);
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 

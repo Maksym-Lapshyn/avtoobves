@@ -22,9 +22,9 @@ namespace Avtoobves.Controllers
         public IActionResult Index() => View();
 
         [HttpGet]
-        public async Task<IActionResult> Product(int id, CancellationToken cancellationToken)
+        public async Task<IActionResult> Product(int productId, CancellationToken cancellationToken)
         {
-            var product = await _productRepository.GetProduct(id, cancellationToken);
+            var product = await _productRepository.GetProduct(productId, cancellationToken);
 
             return View(product);
         }

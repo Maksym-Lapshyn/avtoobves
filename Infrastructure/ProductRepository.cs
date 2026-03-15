@@ -28,7 +28,7 @@ namespace Avtoobves.Infrastructure
 
         public async Task<Product> GetProduct(int id, CancellationToken cancellationToken)
         {
-            var product = await Context.Products.FindAsync(id, cancellationToken);
+            var product = await Context.Products.FirstAsync(p => p.Id == id, cancellationToken);
 
             return product;
         }
@@ -55,7 +55,7 @@ namespace Avtoobves.Infrastructure
             using var transferUtility = CreateTransferUtility(s3Client);
             var existingProduct = await Context.Products.FindAsync(product.Id);
 
-            if (existingProduct == default)
+            if (existingProduct == null)
             {
                 Context.Products.Add(product);
                 await Context.SaveChangesAsync();
@@ -66,6 +66,7 @@ namespace Avtoobves.Infrastructure
                 savedProduct.SmallImage = smallImageUrl;
 
                 await Context.SaveChangesAsync();
+                
                 return;
             }
             
@@ -86,7 +87,7 @@ namespace Avtoobves.Infrastructure
 
         public async Task<int> GetSimilarProductsOffset(int productId, bool left, bool right, CancellationToken cancellationToken)
         {
-            var product = await Context.Products.FindAsync(productId, cancellationToken);
+            var product = await Context.Products.FirstOrDefaultAsync(p => p.Id == productId, cancellationToken);
 
             if (product == null)
             {
