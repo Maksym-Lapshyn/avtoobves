@@ -79,7 +79,9 @@ namespace Avtoobves.Infrastructure
             }
 
             existingProduct.Name = product.Name;
+            existingProduct.NameUk = product.NameUk;
             existingProduct.Description = product.Description;
+            existingProduct.DescriptionUk = product.DescriptionUk;
             existingProduct.Category = product.Category;
 
             await Context.SaveChangesAsync();

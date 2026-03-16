@@ -15,10 +15,10 @@
                         <div class="col-md-3 col-xs-6">
                             <a href="@Url.Action("Product", "Home", new { productId = product.Id })">
                                 <div class="portfolio-box">
-                                    <img src="@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
+                                    <img src="@product.SmallImage" alt="@product.LocalizedName()" name="@product.LocalizedName()" class="img-responsive">
                                     <div class="portfolio-box-caption">
                                         <div class="portfolio-box-caption-content-smaller">
-                                            <h1>@product.Name</h1>
+                                            <h1>@product.LocalizedName()</h1>
                                         </div>
                                     </div>
                                 </div>
@@ -33,10 +33,10 @@
                         <div class="col-md-3 col-xs-6">
                             <a href="@Url.Action("Product", "Home", new { productId = product.Id })">
                                 <div class="portfolio-box">
-                                    <img src="@product.SmallImage" alt="@product.Name" name="@product.Name" class="img-responsive">
+                                    <img src="@product.SmallImage" alt="@product.LocalizedName()" name="@product.LocalizedName()" class="img-responsive">
                                     <div class="portfolio-box-caption">
                                         <div class="portfolio-box-caption-content-smaller">
-                                            <h1>@product.Name</h1>
+                                            <h1>@product.LocalizedName()</h1>
                                         </div>
                                     </div>
                                 </div>

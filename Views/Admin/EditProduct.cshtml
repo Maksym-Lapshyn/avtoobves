@@ -26,11 +26,17 @@
                 @Html.HiddenFor(p => p.Id)
                 @Html.HiddenFor(p => p.SmallImage)
                 @Html.HiddenFor(p => p.BigImage)
-                <p>@Html.LabelFor(p => p.Name)</p>
+                <p>@Html.LabelFor(p => p.Name, "Name (RU)")</p>
                 @Html.TextBoxFor(p => p.Name, new { @class = "form-control" })
 
-                <p>@Html.LabelFor(p => p.Description)</p>
+                <p>@Html.LabelFor(p => p.NameUk, "Name (UA)")</p>
+                @Html.TextBoxFor(p => p.NameUk, new { @class = "form-control" })
+
+                <p>@Html.LabelFor(p => p.Description, "Description (RU)")</p>
                 @Html.TextAreaFor(p => p.Description, new { @class = "form-control", rows = 5 })
+
+                <p>@Html.LabelFor(p => p.DescriptionUk, "Description (UA)")</p>
+                @Html.TextAreaFor(p => p.DescriptionUk, new { @class = "form-control", rows = 5 })
 
                 <p>@Html.LabelFor(p => p.Category)</p>
                 @Html.DropDownListFor(p => p.Category, new SelectList(Enum.GetNames(Model.Category.GetType()), Model.Category.ToString()))

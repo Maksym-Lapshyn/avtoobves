@@ -57,10 +57,10 @@ namespace Avtoobves
             app.UseStaticFiles();
             app.UseRouting();
 
-            var supportedCultures = new[] { new CultureInfo("uk"), new CultureInfo("ru") };
+            var supportedCultures = new[] { new CultureInfo("ru"), new CultureInfo("uk") };
             var localizationOptions = new RequestLocalizationOptions
             {
-                DefaultRequestCulture = new RequestCulture("uk"),
+                DefaultRequestCulture = new RequestCulture("ru"),
                 SupportedCultures = supportedCultures,
                 SupportedUICultures = supportedCultures
             };
