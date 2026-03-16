@@ -30,20 +30,10 @@ namespace Avtoobves.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Blog(CancellationToken cancellationToken)
-        {
-            var blogPosts = await _blogPostRepository.GetBlogPosts(cancellationToken);
-            
-            return View(blogPosts);
-        }
+        public IActionResult Blog(CancellationToken cancellationToken) => NotFound();
 
         [HttpGet]
-        public async Task<IActionResult> BlogPost(Guid id, CancellationToken cancellationToken)
-        {
-            var blogPost = await _blogPostRepository.GetBlogPost(id, cancellationToken);
-
-            return View(blogPost);
-        }
+        public IActionResult BlogPost(Guid id, CancellationToken cancellationToken) => NotFound();
         
         [HttpGet]
         public IActionResult Contacts() => View();
