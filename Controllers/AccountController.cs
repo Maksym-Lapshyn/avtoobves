@@ -35,8 +35,8 @@ namespace Avtoobves.Controllers
 
             if (!isUsernameMatching || !isPasswordMatching)
             {
-                ModelState.AddModelError("", "Неправильное имя пользователя или пароль");
-                TempData["fail"] = "Ошибка аутентификации!";
+                ModelState.AddModelError("", "Wrong username or password!");
+                TempData["fail"] = "Authentication failed!";
 
                 return View();
             }

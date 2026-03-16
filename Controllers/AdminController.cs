@@ -78,7 +78,7 @@ namespace Avtoobves.Controllers
 
             if (productWithSameName != null)
             {
-                ModelState.AddModelError("Name", "Товар с таким названием уже существует");
+                ModelState.AddModelError("Name", "Product with the same name already exists!");
                 
                 return View("EditProduct", product);
             }

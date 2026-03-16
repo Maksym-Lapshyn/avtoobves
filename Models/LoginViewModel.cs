@@ -4,10 +4,10 @@ namespace Avtoobves.Models
 {
     public class LoginViewModel
     {
-        [Required(ErrorMessage = "Введите логин")]
+        [Required(ErrorMessage = "Enter username!")]
         public string UserName { get; set; }
 
-        [Required(ErrorMessage = "Введите пароль")]
+        [Required(ErrorMessage = "Enter password!")]
         public string Password { get; set; }
     }
 }
