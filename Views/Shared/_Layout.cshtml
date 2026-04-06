@@ -4,14 +4,19 @@
     var _qs     = Context.Request.QueryString.Value ?? "";
     var _urlUk  = Url.Action(_action, _ctrl, new { culture = "uk" }) + _qs;
     var _urlRu  = Url.Action(_action, _ctrl, new { culture = "ru" }) + _qs;
+    var _culture = (string)ViewContext.RouteData.Values["culture"] ?? "ru";
+    var _metaDesc = ViewBag.MetaDescription as string ?? L["Meta_Description"].Value;
 }
 <!DOCTYPE html>
-<html>
+<html lang="@_culture">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@ViewBag.Title</title>
-    <meta name="description" content="@L["Meta_Description"]">
+    <link rel="alternate" hreflang="uk" href="@_urlUk">
+    <link rel="alternate" hreflang="ru" href="@_urlRu">
+    <link rel="alternate" hreflang="x-default" href="@_urlRu">
+    <meta name="description" content="@_metaDesc">
     <meta name="keywords" content="обвес, кенгурятник, пороги, нержавейка, защита бампера, обвес Харьков, кузовные дуги">
     <link rel="icon" href="~/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="~/css/site.css"/>
@@ -27,6 +32,25 @@
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WVPWBS3J');
     </script>
     <!-- End Google Tag Manager -->
+    <script type="application/ld+json">
+    {
+      "@@context": "https://schema.org",
+      "@@type": "LocalBusiness",
+      "name": "Автообвес",
+      "url": "https://avtoobves.com.ua",
+      "telephone": "+380974615035",
+      "email": "info@avtoobves.com.ua",
+      "address": {
+        "@@type": "PostalAddress",
+        "streetAddress": "Григоровська 66/2",
+        "addressLocality": "Харків",
+        "addressRegion": "Харківська область",
+        "addressCountry": "UA"
+      },
+      "description": "@L["Meta_Description"].Value",
+      "image": "https://d1ucqhcti31ovy.cloudfront.net/general/head.jpg"
+    }
+    </script>
 </head>
 
 <body>

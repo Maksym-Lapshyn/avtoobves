@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Home RU -->
+  <url>
+    <loc>https://avtoobves.com.ua/ru</loc>
+    <xhtml:link rel="alternate" hreflang="ru"        href="https://avtoobves.com.ua/ru"/>
+    <xhtml:link rel="alternate" hreflang="uk"        href="https://avtoobves.com.ua/uk"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://avtoobves.com.ua/ru"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Home UK -->
+  <url>
+    <loc>https://avtoobves.com.ua/uk</loc>
+    <xhtml:link rel="alternate" hreflang="ru"        href="https://avtoobves.com.ua/ru"/>
+    <xhtml:link rel="alternate" hreflang="uk"        href="https://avtoobves.com.ua/uk"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://avtoobves.com.ua/ru"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Categories RU -->
+  <url>
+    <loc>https://avtoobves.com.ua/ru/Home/Categories</loc>
+    <xhtml:link rel="alternate" hreflang="ru"        href="https://avtoobves.com.ua/ru/Home/Categories"/>
+    <xhtml:link rel="alternate" hreflang="uk"        href="https://avtoobves.com.ua/uk/Home/Categories"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://avtoobves.com.ua/ru/Home/Categories"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Categories UK -->
+  <url>
+    <loc>https://avtoobves.com.ua/uk/Home/Categories</loc>
+    <xhtml:link rel="alternate" hreflang="ru"        href="https://avtoobves.com.ua/ru/Home/Categories"/>
+    <xhtml:link rel="alternate" hreflang="uk"        href="https://avtoobves.com.ua/uk/Home/Categories"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://avtoobves.com.ua/ru/Home/Categories"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Category: Front -->
+  <url>
+    <loc>https://avtoobves.com.ua/ru/Home/Category?categoryName=Front</loc>
+    <xhtml:link rel="alternate" hreflang="ru"        href="https://avtoobves.com.ua/ru/Home/Category?categoryName=Front"/>
+    <xhtml:link rel="alternate" hreflang="uk"        href="https://avtoobves.com.ua/uk/Home/Category?categoryName=Front"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://avtoobves.com.ua/ru/Home/Category?categoryName=Front"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://avtoobves.com.ua/uk/Home/Category?categoryName=Front</loc>
+    <xhtml:link rel="alternate" hreflang="ru"        href="https://avtoobves.com.ua/ru/Home/Category?categoryName=Front"/>
+    <xhtml:link rel="alternate" hreflang="uk"        href="https://avtoobves.com.ua/uk/Home/Category?categoryName=Front"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://avtoobves.com.ua/ru/Home/Category?categoryName=Front"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Category: Rear -->
+  <url>
+    <loc>https://avtoobves.com.ua/ru/Home/Category?categoryName=Rear</loc>
+    <xhtml:link rel="alternate" hreflang="ru"        href="https://avtoobves.com.ua/ru/Home/Category?categoryName=Rear"/>
+    <xhtml:link rel="alternate" hreflang="uk"        href="https://avtoobves.com.ua/uk/Home/Category?categoryName=Rear"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://avtoobves.com.ua/ru/Home/Category?categoryName=Rear"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://avtoobves.com.ua/uk/Home/Category?categoryName=Rear</loc>
+    <xhtml:link rel="alternate" hreflang="ru"        href="https://avtoobves.com.ua/ru/Home/Category?categoryName=Rear"/>
+    <xhtml:link rel="alternate" hreflang="uk"        href="https://avtoobves.com.ua/uk/Home/Category?categoryName=Rear"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://avtoobves.com.ua/ru/Home/Category?categoryName=Rear"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Category: Footer (steps/side bars) -->
+  <url>
+    <loc>https://avtoobves.com.ua/ru/Home/Category?categoryName=Footer</loc>
+    <xhtml:link rel="alternate" hreflang="ru"        href="https://avtoobves.com.ua/ru/Home/Category?categoryName=Footer"/>
+    <xhtml:link rel="alternate" hreflang="uk"        href="https://avtoobves.com.ua/uk/Home/Category?categoryName=Footer"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://avtoobves.com.ua/ru/Home/Category?categoryName=Footer"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://avtoobves.com.ua/uk/Home/Category?categoryName=Footer</loc>
+    <xhtml:link rel="alternate" hreflang="ru"        href="https://avtoobves.com.ua/ru/Home/Category?categoryName=Footer"/>
+    <xhtml:link rel="alternate" hreflang="uk"        href="https://avtoobves.com.ua/uk/Home/Category?categoryName=Footer"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://avtoobves.com.ua/ru/Home/Category?categoryName=Footer"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Category: Other -->
+  <url>
+    <loc>https://avtoobves.com.ua/ru/Home/Category?categoryName=Other</loc>
+    <xhtml:link rel="alternate" hreflang="ru"        href="https://avtoobves.com.ua/ru/Home/Category?categoryName=Other"/>
+    <xhtml:link rel="alternate" hreflang="uk"        href="https://avtoobves.com.ua/uk/Home/Category?categoryName=Other"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://avtoobves.com.ua/ru/Home/Category?categoryName=Other"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://avtoobves.com.ua/uk/Home/Category?categoryName=Other</loc>
+    <xhtml:link rel="alternate" hreflang="ru"        href="https://avtoobves.com.ua/ru/Home/Category?categoryName=Other"/>
+    <xhtml:link rel="alternate" hreflang="uk"        href="https://avtoobves.com.ua/uk/Home/Category?categoryName=Other"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://avtoobves.com.ua/ru/Home/Category?categoryName=Other"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog RU -->
+  <url>
+    <loc>https://avtoobves.com.ua/ru/Home/Blog</loc>
+    <xhtml:link rel="alternate" hreflang="ru"        href="https://avtoobves.com.ua/ru/Home/Blog"/>
+    <xhtml:link rel="alternate" hreflang="uk"        href="https://avtoobves.com.ua/uk/Home/Blog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://avtoobves.com.ua/ru/Home/Blog"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Blog UK -->
+  <url>
+    <loc>https://avtoobves.com.ua/uk/Home/Blog</loc>
+    <xhtml:link rel="alternate" hreflang="ru"        href="https://avtoobves.com.ua/ru/Home/Blog"/>
+    <xhtml:link rel="alternate" hreflang="uk"        href="https://avtoobves.com.ua/uk/Home/Blog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://avtoobves.com.ua/ru/Home/Blog"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Contacts RU -->
+  <url>
+    <loc>https://avtoobves.com.ua/ru/Home/Contacts</loc>
+    <xhtml:link rel="alternate" hreflang="ru"        href="https://avtoobves.com.ua/ru/Home/Contacts"/>
+    <xhtml:link rel="alternate" hreflang="uk"        href="https://avtoobves.com.ua/uk/Home/Contacts"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://avtoobves.com.ua/ru/Home/Contacts"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Contacts UK -->
+  <url>
+    <loc>https://avtoobves.com.ua/uk/Home/Contacts</loc>
+    <xhtml:link rel="alternate" hreflang="ru"        href="https://avtoobves.com.ua/ru/Home/Contacts"/>
+    <xhtml:link rel="alternate" hreflang="uk"        href="https://avtoobves.com.ua/uk/Home/Contacts"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://avtoobves.com.ua/ru/Home/Contacts"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+</urlset>

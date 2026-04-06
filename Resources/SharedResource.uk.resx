@@ -67,6 +67,15 @@
   <data name="Meta_Description" xml:space="preserve">
     <value>Кенгурятники, окантовки, задні захисти, пороги, дуги пікапів та інші вироби з високоякісної нержавіючої сталі на замовлення у Харкові. Доставка по всій Україні.</value>
   </data>
+  <data name="Meta_Description_Contacts" xml:space="preserve">
+    <value>Адреса, телефон та email майстерні з виготовлення обвісу з нержавійки у Харкові. Кенгурятники, пороги, задні захисти — на замовлення. Доставка по Україні.</value>
+  </data>
+  <data name="Meta_Description_Categories" xml:space="preserve">
+    <value>Каталог робіт з виготовлення обвісу з нержавійки: передні та задні захисти, пороги, інші вироби. Харків, доставка по всій Україні.</value>
+  </data>
+  <data name="Meta_Description_Product" xml:space="preserve">
+    <value>{0} — {1} з нержавіючої сталі на замовлення у Харкові. Висока якість, встановлення та ремонт. Доставка по Україні.</value>
+  </data>
 
   <!-- Page Titles -->
   <data name="PageTitle_Home" xml:space="preserve">
@@ -192,7 +201,7 @@
     <value>Харків, Україна</value>
   </data>
   <data name="Contacts_District" xml:space="preserve">
-    <value>Жовтневий район</value>
+    <value>Новобаварський Район</value>
   </data>
   <data name="Contacts_Metro" xml:space="preserve">
     <value>Станція метро "Холодна гора"</value>

@@ -67,6 +67,15 @@
   <data name="Meta_Description" xml:space="preserve">
     <value>Кенгурятники, окантовки, задние защиты, пороги, дуги пикапов, и прочие изделия из высококачественной нержавеющей стали под заказ в Харькове. Доставка по всей Украине.</value>
   </data>
+  <data name="Meta_Description_Contacts" xml:space="preserve">
+    <value>Адрес, телефон и email мастерской по изготовлению обвеса из нержавейки в Харькове. Кенгурятники, пороги, задние защиты — под заказ. Доставка по Украине.</value>
+  </data>
+  <data name="Meta_Description_Categories" xml:space="preserve">
+    <value>Каталог работ по изготовлению обвеса из нержавейки: передние и задние защиты, пороги, прочие изделия. Харьков, доставка по всей Украине.</value>
+  </data>
+  <data name="Meta_Description_Product" xml:space="preserve">
+    <value>{0} — {1} из нержавеющей стали под заказ в Харькове. Высокое качество, установка и ремонт. Доставка по Украине.</value>
+  </data>
 
   <!-- Page Titles -->
   <data name="PageTitle_Home" xml:space="preserve">
@@ -192,7 +201,7 @@
     <value>Харьков, Украина</value>
   </data>
   <data name="Contacts_District" xml:space="preserve">
-    <value>Октябрьский Район</value>
+    <value>Новобаварский Район</value>
   </data>
   <data name="Contacts_Metro" xml:space="preserve">
     <value>Станция метро "Холодная гора"</value>

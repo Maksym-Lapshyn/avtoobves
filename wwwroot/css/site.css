@@ -31,6 +31,7 @@ body {
 
 .site-content {
     flex: 1;
+    overflow-x: hidden;
 }
 
 .anchor-standard {
@@ -100,7 +101,6 @@ hr {
 body {
     line-height: 1.5;
     font-family: 'Ubuntu', sans-serif;
-    overflow-x: hidden;
     color: #DFFDFF;
     background-color: #DFFDFF;
     background-image: url('https://d1ucqhcti31ovy.cloudfront.net/general/shattered.png');
@@ -181,7 +181,8 @@ body {
 
 .navbar-fixed-top {
     /*padding: 40px 0;*/
-    transition: all 0.5s;
+    z-index: 1030;
+    transition: background-color 0.5s, padding 0.5s;
 }
 
 .top-nav-collapse {
@@ -467,6 +468,17 @@ footer {
     .navbar-default .navbar-brand {
         font-size: 22px;
         margin-right: 20px;
+    }
+}
+
+@media (max-width: 767px) {
+    .lang-picker {
+        display: block !important;
+        padding: 10px 0;
+    }
+
+    .lang-picker a {
+        padding: 0;
     }
 }
 
